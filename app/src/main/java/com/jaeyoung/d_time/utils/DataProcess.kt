@@ -10,11 +10,12 @@ import io.reactivex.schedulers.Schedulers
 
 class DataProcess(context: Context) {
     private val mContext = context
-    fun insertTodoData( date: String, title: String) {
+    fun insertTodoData( date: String, title: String,todoDataCallback: TodoDataCallback) {
         val a = Observable.just(TodoData(System.currentTimeMillis(),date,title))
             .subscribeOn(Schedulers.io())
             .subscribe {
                 TodoDataDB.getInstance(mContext)?.getTodoDao()?.insert(it)
+                getTodoData(todoDataCallback)
             }
     }
 

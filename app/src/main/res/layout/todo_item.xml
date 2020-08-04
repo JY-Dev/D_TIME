@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:background="@drawable/plus_btn_back"
     android:paddingEnd="12dp"
+    android:layout_marginBottom="8dp"
     android:gravity="center_vertical">
 
     <androidx.appcompat.widget.AppCompatCheckBox

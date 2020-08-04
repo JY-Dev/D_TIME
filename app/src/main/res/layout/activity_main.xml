@@ -37,15 +37,15 @@
                 android:textColor="#000"
                 android:text="TO DO"/>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/todo_listview"
-                android:layout_width="wrap_content"
-                android:layout_height="136dp" />
+                android:layout_width="match_parent"
+                android:layout_height="174dp"/>
 
             <LinearLayout
                 android:id="@+id/todo_listempty"
                 android:layout_width="match_parent"
-                android:layout_height="136dp"
+                android:layout_height="152dp"
                 android:visibility="gone"
                 android:gravity="center">
                 <TextView

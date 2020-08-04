@@ -24,8 +24,11 @@ class MainViewModel : ViewModel() , KoinComponent {
     }
 
     fun insertTodoData(date :String ,title :String ){
-        dataProcess.insertTodoData(date, title)
-        getTodoData()
+        dataProcess.insertTodoData(date, title,object :TodoDataCallback{
+            override fun finish(todoData: MutableList<TodoData>) {
+                todoLiveData.postValue(todoData)
+            }
+        })
     }
 
     fun deleteTodoData(primaryKey: Int){
