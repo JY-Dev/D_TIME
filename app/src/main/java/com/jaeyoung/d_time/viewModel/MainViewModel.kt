@@ -1,0 +1,35 @@
+package com.jaeyoung.d_time.viewModel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.room.PrimaryKey
+import com.jaeyoung.d_time.TodoDataCallback
+import com.jaeyoung.d_time.room.TodoData
+import com.jaeyoung.d_time.utils.DataProcess
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+
+class MainViewModel : ViewModel() , KoinComponent {
+    private val todoLiveData = MutableLiveData<List<TodoData>>()
+    val dataProcess : DataProcess by inject()
+    val todoDataList : LiveData<List<TodoData>> get() = todoLiveData
+
+    fun getTodoData(){
+      dataProcess.getTodoData(object : TodoDataCallback{
+          override fun finish(todoData: List<TodoData>) {
+              todoLiveData.postValue(todoData)
+          }
+      })
+    }
+
+    fun insertTodoData(date :String ,title :String ){
+        dataProcess.insertTodoData(date, title)
+        getTodoData()
+    }
+
+    fun deleteTodoData(primaryKey: Int){
+        dataProcess.deleteTodoData(primaryKey)
+        getTodoData()
+    }
+}

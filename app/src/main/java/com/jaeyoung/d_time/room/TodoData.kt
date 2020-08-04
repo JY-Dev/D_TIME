@@ -3,9 +3,9 @@ package com.jaeyoung.d_time.room
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "TodoData")
+@Entity
 data class TodoData(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val title: String,
     val date: String
 )

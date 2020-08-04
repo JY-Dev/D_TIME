@@ -47,6 +47,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/add_btn"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/plus_btn_back"
@@ -62,6 +63,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/todo_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -75,10 +77,12 @@
                     android:layout_height="32dp"
                     android:background="@drawable/plus_btn_back"
                     android:gravity="center">
+
                     <Button
+                        android:id="@+id/date_btn"
                         android:layout_width="17dp"
-                        android:layout_height="17dp"
-                        android:background="@drawable/calendar"/>
+                        android:layout_height="11dp"
+                        android:background="@drawable/calendar" />
                 </LinearLayout>
 
 
