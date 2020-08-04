@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface TodoDao {
     @Query("SELECT * FROM TodoData")
-    fun getTodoAllData() : List<TodoData>
+    fun getTodoAllData() : MutableList<TodoData>
 
     //이미 저장된 항목이 있을 경우 데이터를 덮어쓴다
     @Insert

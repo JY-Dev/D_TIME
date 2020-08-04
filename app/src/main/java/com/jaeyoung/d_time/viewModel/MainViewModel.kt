@@ -11,13 +11,13 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class MainViewModel : ViewModel() , KoinComponent {
-    private val todoLiveData = MutableLiveData<List<TodoData>>()
+    private val todoLiveData = MutableLiveData<MutableList<TodoData>>()
     val dataProcess : DataProcess by inject()
-    val todoDataList : LiveData<List<TodoData>> get() = todoLiveData
+    val todoDataList : LiveData<MutableList<TodoData>> get() = todoLiveData
 
     fun getTodoData(){
       dataProcess.getTodoData(object : TodoDataCallback{
-          override fun finish(todoData: List<TodoData>) {
+          override fun finish(todoData: MutableList<TodoData>) {
               todoLiveData.postValue(todoData)
           }
       })

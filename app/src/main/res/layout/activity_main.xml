@@ -37,8 +37,23 @@
                 android:text="TO DO"/>
 
             <ListView
+                android:id="@+id/todo_listview"
                 android:layout_width="wrap_content"
                 android:layout_height="136dp" />
+
+            <LinearLayout
+                android:id="@+id/todo_listempty"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                android:visibility="gone"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Add Your Todo List"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
