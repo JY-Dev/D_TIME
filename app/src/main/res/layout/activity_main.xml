@@ -33,6 +33,7 @@
                 android:textSize="22sp"
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="9dp"
+                android:fontFamily="@font/font"
                 android:textColor="#000"
                 android:text="TO DO"/>
 
@@ -83,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginStart="10dp"
+                        android:fontFamily="@font/font"
                         android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
@@ -119,10 +121,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:textSize="22sp"
-                android:textColor="#000"
                 android:layout_marginBottom="9dp"
-                android:text="NOW"/>
+                android:text="NOW"
+                android:fontFamily="@font/font"
+                android:textColor="#000"
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -137,6 +140,7 @@
                     android:textSize="14sp"
                     android:textColor="#000"
                     android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/font"
                     android:text="09:00 - 13:00"/>
 
                 <View
@@ -149,6 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:fontFamily="@font/font"
                     android:textColor="#000"
                     android:text="Meet Sam in front of the Station"/>
 
@@ -173,6 +178,7 @@
                 android:layout_marginStart="15dp"
                 android:textSize="22sp"
                 android:textColor="#000"
+                android:fontFamily="@font/font"
                 android:layout_marginBottom="9dp"
                 android:text="NEXT"/>
 
@@ -188,6 +194,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="#000"
+                    android:fontFamily="@font/font"
                     android:layout_marginBottom="6dp"
                     android:text="13:00 - 14:00"/>
 
@@ -202,6 +209,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="#000"
+                    android:fontFamily="@font/font"
                     android:text="Have Lunch With Sam"/>
 
             </LinearLayout>

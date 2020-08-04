@@ -22,6 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
             android:textSize="20sp"
             android:text="HOME"/>
 
@@ -32,12 +33,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="NOTICE"
+        android:fontFamily="@font/font"
         android:textSize="30sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/font"
         android:text="DONATION"
         android:textSize="30sp"/>
 
@@ -45,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/font"
         android:text="SETTING"
         android:textSize="30sp"/>
 
