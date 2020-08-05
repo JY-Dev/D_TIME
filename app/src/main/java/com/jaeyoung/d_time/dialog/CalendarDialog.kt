@@ -1,10 +1,11 @@
-package com.jaeyoung.d_time
+package com.jaeyoung.d_time.dialog
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
+import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.viewModel.CalendarViewModel
 import kotlinx.android.synthetic.main.dialog_cal.*
 

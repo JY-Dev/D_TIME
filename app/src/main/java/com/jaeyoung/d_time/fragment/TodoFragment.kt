@@ -8,14 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jaeyoung.d_time.CalendarDialog
+import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.adapter.TodoAdapter
 import com.jaeyoung.d_time.adapter.TodoItemDecoration
@@ -50,7 +49,8 @@ class TodoFragment(
         val view = inflater.inflate(R.layout.fragment_todo, container, false)
         linearLayoutManager = LinearLayoutManager(mContext)
         itemDecoration = TodoItemDecoration(mContext)
-        calendarDialog = CalendarDialog(mContext,calViewModel)
+        calendarDialog =
+            CalendarDialog(mContext, calViewModel)
         imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         //View Model
         val androidViewModelFactory =
