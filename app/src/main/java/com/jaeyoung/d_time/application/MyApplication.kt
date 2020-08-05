@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time
+package com.jaeyoung.d_time.application
 
 import android.app.Application
 import com.jaeyoung.d_time.utils.DataProcess

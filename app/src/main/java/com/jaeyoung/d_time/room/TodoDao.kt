@@ -15,5 +15,5 @@ interface TodoDao {
     fun insert(vararg todoData: TodoData)
 
     @Query("DELETE FROM TodoData WHERE `id` =:primaryKey")
-    fun deleteTodoData(primaryKey: Int)
+    fun deleteTodoData(primaryKey: Long)
 }

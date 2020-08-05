@@ -1,18 +1,16 @@
 package com.jaeyoung.d_time.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.TodoAdapter
-import com.jaeyoung.d_time.TodoItemAdpater
-import com.jaeyoung.d_time.TodoItemDecoration
-import com.jaeyoung.d_time.utils.DataProcess
+import com.jaeyoung.d_time.adapter.TodoAdapter
+import com.jaeyoung.d_time.adapter.TodoItemDecoration
 import com.jaeyoung.d_time.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -43,7 +41,22 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.todoDataList.observe(this, Observer {
             todoItemAdpater.setData(it)
             todo_listview.smoothScrollToPosition(todoItemAdpater.itemCount)
+            if(todoItemAdpater.itemCount==0) listVisiblity(true)
+            else listVisiblity(false)
         })
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                mainViewModel.deleteTodoData(todoItemAdpater.getItem(viewHolder.adapterPosition).id)
+            }
+        }).attachToRecyclerView(todo_listview)
         todo_listview.apply {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
@@ -76,8 +89,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun listVisiblity(isEmpty:Boolean){
+        todo_listempty.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        todo_listview.visibility = if (isEmpty) View.GONE else View.VISIBLE
+    }
+
     override fun onBackPressed() {
         if(drawer_layout.isDrawerOpen(drawer)) drawer_layout.closeDrawer(drawer)
         else finish()
     }
+
+
 }

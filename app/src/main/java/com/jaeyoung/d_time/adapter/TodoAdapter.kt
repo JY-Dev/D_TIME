@@ -1,6 +1,5 @@
-package com.jaeyoung.d_time
+package com.jaeyoung.d_time.adapter
 
-import android.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -36,5 +35,9 @@ class TodoAdapter(context: Context) : RecyclerView.Adapter<TodoAdapter.ViewHolde
     fun setData(todoData: MutableList<TodoData>) {
         this.todoData = todoData
         notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int) : TodoData{
+        return todoData[position]
     }
 }

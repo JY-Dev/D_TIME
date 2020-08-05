@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time
+package com.jaeyoung.d_time.adapter
 
 import android.app.Activity
 import android.content.Context

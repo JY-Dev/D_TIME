@@ -45,13 +45,14 @@
             <LinearLayout
                 android:id="@+id/todo_listempty"
                 android:layout_width="match_parent"
-                android:layout_height="152dp"
+                android:layout_height="174dp"
                 android:visibility="gone"
                 android:gravity="center">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/font"
                     android:text="Add Your Todo List"/>
 
             </LinearLayout>
