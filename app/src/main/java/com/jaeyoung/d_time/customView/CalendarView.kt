@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.viewModel.CalendarViewModel
 import kotlinx.android.synthetic.main.top_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,6 +26,7 @@ class CalendarView : LinearLayout {
     private var selCal = Calendar.getInstance()
     private var currentDate = cal
     private var gridView : GridView = GridView(context)
+    private var calViewModel : CalendarViewModel? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -94,12 +96,14 @@ class CalendarView : LinearLayout {
     }
 
     private fun createGridView(): GridView {
-        val lp = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val lp = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         gridView.setOnItemClickListener { adapterView, view, position, l ->
             if(adapterView.getItemAtPosition(position)!=0){
                 selCal.set(year, month, adapterView.getItemAtPosition(position) as Int, 0, 0, 0)
-                Toast.makeText(context,getDateFull(selCal),Toast.LENGTH_SHORT).show()
-                calendarAdapter.setSelect(position)
+                calViewModel.let {
+                    it?.setCal(selCal)
+                }
+                calendarAdapter.setSelect(position,selCal)
             }
 
         }
@@ -108,6 +112,7 @@ class CalendarView : LinearLayout {
             layoutParams = lp
             numColumns = 7
             adapter = calendarAdapter
+            isVerticalScrollBarEnabled = false
             //setSelector(R.drawable.list_selector)
             choiceMode = AbsListView.CHOICE_MODE_SINGLE
         }
@@ -118,7 +123,9 @@ class CalendarView : LinearLayout {
         return selCal
     }
 
-
+    fun setCalViewModel(calendarViewModel: CalendarViewModel){
+        calViewModel = calendarViewModel
+    }
 
     private fun createTextView(text: String): TextView {
         val lp = LayoutParams(

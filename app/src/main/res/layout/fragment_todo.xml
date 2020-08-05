@@ -32,6 +32,7 @@
                     android:textColor="#000"
                     android:text="TO DO"/>
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/todo_listview"
                     android:layout_width="match_parent"
@@ -97,6 +98,7 @@
                             android:layout_height="11dp"
                             android:background="@drawable/calendar" />
                     </LinearLayout>
+
 
 
                 </LinearLayout>
@@ -216,4 +218,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>

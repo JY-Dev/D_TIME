@@ -14,24 +14,24 @@ class DataProcess(context: Context) {
             .subscribeOn(Schedulers.io())
             .subscribe { db->
                 db?.getTodoDao()?.insert(TodoData(System.currentTimeMillis(),date,title))
-                getTodoData(todoDataCallback)
+                getTodoData(todoDataCallback,date)
             }
     }
 
-    fun getTodoData(todoDataCallback: TodoDataCallback){
+    fun getTodoData(todoDataCallback: TodoDataCallback,date: String){
         val a = Observable.just(TodoDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe{db ->
-                db?.getTodoDao()?.getTodoAllData()?.let { it1 -> todoDataCallback.finish(it1) }
+                db?.getTodoDao()?.getTodoData(date)?.let { it1 -> todoDataCallback.finish(it1) }
             }
     }
 
-    fun deleteTodoData(primaryKey: Long,todoDataCallback: TodoDataCallback){
+    fun deleteTodoData(date: String,primaryKey: Long,todoDataCallback: TodoDataCallback){
         val a = Observable.just(TodoDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
                 db?.getTodoDao()?.deleteTodoData(primaryKey)
             }
-        getTodoData(todoDataCallback)
+        getTodoData(todoDataCallback,date)
     }
 }
