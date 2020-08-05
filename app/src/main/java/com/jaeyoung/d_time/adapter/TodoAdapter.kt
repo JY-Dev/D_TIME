@@ -1,18 +1,26 @@
 package com.jaeyoung.d_time.adapter
 
 import android.content.Context
+import android.graphics.Paint
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jaeyoung.d_time.room.TodoData
+import com.jaeyoung.d_time.viewModel.TodoViewModel
 import kotlinx.android.synthetic.main.todo_item.view.*
 
 
-class TodoAdapter(context: Context) : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+class TodoAdapter(context: Context,todoViewModel: TodoViewModel) : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     private var todoData = mutableListOf<TodoData>()
     private val mContext = context
+    private val mTodoViewModel = todoViewModel
 
     override fun getItemCount(): Int {
         return todoData.size
@@ -20,6 +28,17 @@ class TodoAdapter(context: Context) : RecyclerView.Adapter<TodoAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.titleTv.text = todoData[position].title
+        holder.clearCheckBox.let {
+            it.setOnClickListener {
+                mTodoViewModel.updateTodoData(holder.clearCheckBox.isChecked,todoData[position].id)
+            }
+            it.setOnCheckedChangeListener { compoundButton, isChecked ->
+                if(isChecked) holder.titleTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                else holder.titleTv.paintFlags = 0
+            }
+            it.isChecked = todoData[position].isClear
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +49,7 @@ class TodoAdapter(context: Context) : RecyclerView.Adapter<TodoAdapter.ViewHolde
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var titleTv: TextView = itemView.title_todo
+        var clearCheckBox : CheckBox = itemView.clear_check
     }
 
     fun setData(todoData: MutableList<TodoData>) {

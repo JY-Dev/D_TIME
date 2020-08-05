@@ -10,19 +10,28 @@
     android:gravity="center_vertical">
 
     <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/clear_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        android:checked="false"
         android:button="@drawable/todo_checkbox"/>
 
-    <TextView
-        android:id="@+id/title_todo"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="15sp"
-        android:fontFamily="@font/font"
-        android:textColor="#000000"
-        android:text="Take A Photo"/>
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/title_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:fontFamily="@font/font"
+            android:layout_centerVertical="true"
+            android:textColor="#000000"
+            android:text="Take A Photo"/>
+    </RelativeLayout>
+
 
 </LinearLayout>

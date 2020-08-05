@@ -1,5 +1,6 @@
 package com.jaeyoung.d_time.viewModel
 
+import android.widget.CheckBox
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +40,9 @@ class TodoViewModel : ViewModel() , KoinComponent {
                 todoLiveData.postValue(todoData)
             }
         })
+    }
 
+    fun updateTodoData(isChecked: Boolean,primaryKey: Long){
+        dataProcess.updateTodoData(isChecked,primaryKey)
     }
 }
