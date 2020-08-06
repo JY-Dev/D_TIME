@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.adapter.MainPagerAdpater
+import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.fragment.DiaryFragment
 import com.jaeyoung.d_time.fragment.TimeTableFragment
 import com.jaeyoung.d_time.fragment.TodoFragment
@@ -20,6 +21,8 @@ import kotlinx.android.synthetic.main.drawer_layout.*
 
 class MainActivity : AppCompatActivity() {
     private val titleList = mutableListOf("D TIME","DIARY","TIMETABLE")
+    private lateinit var calendarViewModel: CalendarViewModel
+    private lateinit var calendarDialog: CalendarDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +31,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val androidViewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        val calendarViewModel = ViewModelProvider(this,androidViewModelFactory).get(CalendarViewModel::class.java)
-        main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application,calendarViewModel),DiaryFragment(this),TimeTableFragment(this)))
+        calendarViewModel = ViewModelProvider(this,androidViewModelFactory).get(CalendarViewModel::class.java)
+        calendarDialog = CalendarDialog(this,calendarViewModel)
+        main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application),DiaryFragment(this),TimeTableFragment(this)))
         main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -60,5 +64,15 @@ class MainActivity : AppCompatActivity() {
         else finish()
     }
 
+    fun getCalendarViewModel() : CalendarViewModel{
+        return calendarViewModel
+    }
 
+    fun showCalendarDialog(){
+        calendarDialog.show()
+    }
+
+    fun dismissCalendarDialog(){
+        calendarDialog.dismiss()
+    }
 }

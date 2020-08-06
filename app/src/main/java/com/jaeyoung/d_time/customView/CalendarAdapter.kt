@@ -57,6 +57,7 @@ class CalendarAdapter(context: Context) : BaseAdapter() {
     fun setSelect(position: Int,cal:Calendar){
         this.selCal = cal
         selPostion = position
+        setCal()
         notifyDataSetChanged()
     }
 

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.MainActivity
 import com.jaeyoung.d_time.adapter.TodoAdapter
 import com.jaeyoung.d_time.adapter.TodoItemDecoration
 import com.jaeyoung.d_time.viewModel.CalendarViewModel
@@ -27,14 +28,13 @@ import java.util.*
 
 class TodoFragment(
     context: Context,
-    application: Application,
-    calendarViewModel: CalendarViewModel
+    application: Application
 ) : Fragment() {
     private val mContext = context
+    private val mainActivity = context as MainActivity
     private val mApplication = application
     private var cal = Calendar.getInstance()
-    private val calViewModel = calendarViewModel
-    lateinit var calendarDialog : CalendarDialog
+    private val calViewModel = mainActivity.getCalendarViewModel()
     lateinit var todoViewModel: TodoViewModel
     lateinit var todoItemAdpater: TodoAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
@@ -49,8 +49,6 @@ class TodoFragment(
         val view = inflater.inflate(R.layout.fragment_todo, container, false)
         linearLayoutManager = LinearLayoutManager(mContext)
         itemDecoration = TodoItemDecoration(mContext)
-        calendarDialog =
-            CalendarDialog(mContext, calViewModel)
         imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         //View Model
         val androidViewModelFactory =
@@ -66,7 +64,7 @@ class TodoFragment(
         todoItemAdpater = TodoAdapter(mContext,todoViewModel)
         calViewModel.calData.observe(this, Observer {
             cal = it
-            calendarDialog.dismiss()
+            mainActivity.dismissCalendarDialog()
             todoViewModel.getTodoData(getDate(cal))
 
         })
@@ -108,8 +106,7 @@ class TodoFragment(
         }
 
         view.date_btn.setOnClickListener {
-
-           calendarDialog.show()
+            mainActivity.showCalendarDialog()
         }
         return view
     }
