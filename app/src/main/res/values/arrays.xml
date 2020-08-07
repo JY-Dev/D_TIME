@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="weather_image">
+        <item>@drawable/icons_8_sun_500</item>
+        <item>@drawable/clouds</item>
+        <item>@drawable/rain</item>
+        <item>@drawable/rain_2</item>
+        <item>@drawable/ice</item>
+    </array>
+
+    <array name="emotion_image">
+        <item>@drawable/smile</item>
+        <item>@drawable/sad</item>
+        <item>@drawable/angry</item>
+        <item>@drawable/fire</item>
+        <item>@drawable/congratulation</item>
+        <item>@drawable/cigar</item>
+        <item>@drawable/birthday</item>
+    </array>
+</resources>

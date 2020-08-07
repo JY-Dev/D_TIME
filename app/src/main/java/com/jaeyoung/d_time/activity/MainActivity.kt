@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        drawer_btn.visibility = View.VISIBLE
         val androidViewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         calendarViewModel = ViewModelProvider(this,androidViewModelFactory).get(CalendarViewModel::class.java)
         calendarDialog = CalendarDialog(this,calendarViewModel)

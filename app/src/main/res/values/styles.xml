@@ -7,4 +7,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style parent="android:Widget.Spinner" name="SpinnerAsEditText">
+        <item name="android:background">#fff</item>
+        <item name="dropDownListViewStyle">@style/SpinnerDropdown</item>
+    </style>
+
+    <style name="SpinnerDropdown" parent="android:Widget.ListView.DropDown">
+        <item name="android:dividerHeight">2dp</item>
+        <item name="divider">@color/colorPrimaryDark</item>
+    </style>
 </resources>

@@ -26,12 +26,13 @@
            android:background="#000"/>
 
        <ImageButton
+           android:id="@+id/write_btn"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:src="@drawable/icons_8_edit_208"
            android:layout_gravity="center"
            android:layout_weight="1"
-           android:background="#ffffff"/>
+           android:background="#ffffff"
+           android:src="@drawable/icons_8_edit_208" />
 
        <View
            android:layout_width="2dp"
