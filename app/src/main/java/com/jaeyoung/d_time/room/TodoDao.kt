@@ -7,19 +7,34 @@ import androidx.room.Query
 
 @Dao
 interface TodoDao {
+
+    /**
+     * Get All TodoData
+     */
     @Query("SELECT * FROM TodoData")
     fun getTodoAllData() : MutableList<TodoData>
 
+    /**
+     * Get Express TodoData
+     */
     @Query("SELECT * FROM TodoData WHERE `date` =:date")
     fun getTodoData(date:String) : MutableList<TodoData>
 
+    /**
+     * Update Certain TodoData
+     */
     @Query("UPDATE TodoData SET isClear =:isChecked WHERE `id` =:primaryKey")
     fun updateTodoData(isChecked:Boolean,primaryKey: Long)
 
-    //이미 저장된 항목이 있을 경우 데이터를 덮어쓴다
+    /**
+     * Insert TodoData
+     */
     @Insert
     fun insert(vararg todoData: TodoData)
 
+    /**
+     * Delete TodoData
+     */
     @Query("DELETE FROM TodoData WHERE `id` =:primaryKey")
     fun deleteTodoData(primaryKey: Long)
 }

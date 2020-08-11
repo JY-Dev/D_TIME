@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/drawer_layout"
     tools:context=".activity.MainActivity">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,13 +53,23 @@
                 </LinearLayout>
 
 
-                <ImageButton
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/plus_btn_back"
-                    android:layout_marginEnd="10dp"
-                    android:padding="5dp"
-                    android:src="@drawable/outline_add_black_48" />
+                    android:layout_height="wrap_content">
+
+
+                    <ImageButton
+                        android:id="@+id/edit_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/plus_btn_back"
+                        android:layout_marginEnd="10dp"
+                        android:padding="5dp"
+                        android:src="@drawable/outline_add_black_48" />
+
+
+                </RelativeLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -95,18 +105,29 @@
                         android:layout_marginEnd="10dp"
                         android:popupBackground="@drawable/plus_btn_back"
                         style="@style/SpinnerAsEditText"
+                        android:dropDownWidth="60dp"
                         android:dropDownVerticalOffset="50dp"
                         android:spinnerMode="dropdown"/>
 
                 </LinearLayout>
 
-                <ImageButton
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/plus_btn_back"
-                    android:layout_marginStart="10dp"
-                    android:padding="10dp"
-                    android:src="@drawable/more" />
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/more_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/plus_btn_back"
+                        android:layout_marginStart="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/more" />
+
+                </RelativeLayout>
+
+
 
 
 
@@ -119,4 +140,9 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:id="@+id/whole_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

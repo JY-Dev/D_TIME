@@ -9,6 +9,9 @@ import android.widget.BaseAdapter
 import com.jaeyoung.d_time.R
 import kotlinx.android.synthetic.main.diary_spinner_row.view.*
 
+/**
+ * DiarySpinnerAdapter (Weather,Emotion)
+ */
 class DiarySpinnerAdapter(context: Context, imageArray: TypedArray) : BaseAdapter() {
     val imageTypeArray = imageArray
     val mContext = context

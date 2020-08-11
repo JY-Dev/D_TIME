@@ -10,6 +10,9 @@ import com.jaeyoung.d_time.utils.DataProcess
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
+/**
+ * TodoViewModel
+ */
 class TodoViewModel : ViewModel() , KoinComponent {
     private val todoLiveData = MutableLiveData<MutableList<TodoData>>()
     val dataProcess : DataProcess by inject()

@@ -3,6 +3,12 @@ package com.jaeyoung.d_time.room
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Todo Room Data
+ * Date : TodoDate
+ * Title : TodoList
+ * isClear : Finished Todo?
+ */
 @Entity
 data class TodoData(
     @PrimaryKey(autoGenerate = true) val id: Long,

@@ -27,12 +27,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        toolBarInit()
+        viewModelInit()
+        viewInit()
+    }
+
+    /**
+     * ToolBar Init
+     */
+    private fun toolBarInit(){
         setSupportActionBar(app_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         drawer_btn.visibility = View.VISIBLE
+    }
+
+    /**
+     * TodoViewModel Init
+     */
+    private fun viewModelInit(){
         val androidViewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         calendarViewModel = ViewModelProvider(this,androidViewModelFactory).get(CalendarViewModel::class.java)
         calendarDialog = CalendarDialog(this,calendarViewModel)
+    }
+
+    /**
+     * UI Init
+     */
+    private fun viewInit(){
         main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application),DiaryFragment(this),TimeTableFragment(this)))
         main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
