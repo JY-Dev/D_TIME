@@ -14,12 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.activity.MainActivity
 import com.jaeyoung.d_time.adapter.TodoAdapter
 import com.jaeyoung.d_time.adapter.TodoItemDecoration
-import com.jaeyoung.d_time.viewModel.CalendarViewModel
+import com.jaeyoung.d_time.room.todo.TodoData
 import com.jaeyoung.d_time.viewModel.TodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 import java.text.SimpleDateFormat
@@ -61,6 +60,9 @@ class TodoFragment(
             if (todoItemAdpater.itemCount == 0) listVisiblity(view, true)
             else listVisiblity(view, false)
         })
+        todoViewModel.changeStatus.observe(this, Observer {
+            todoViewModel.getTodoData(getDate(cal))
+        })
         todoItemAdpater = TodoAdapter(mContext,todoViewModel)
         calViewModel.calData.observe(this, Observer {
             cal = it
@@ -79,8 +81,7 @@ class TodoFragment(
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 todoViewModel.deleteTodoData(
-                    todoItemAdpater.getItem(viewHolder.adapterPosition).id,
-                    todoItemAdpater.getItem(viewHolder.adapterPosition).date
+                    todoItemAdpater.getItem(viewHolder.adapterPosition).id
                 )
             }
         }).attachToRecyclerView(view.todo_listview)
@@ -98,7 +99,14 @@ class TodoFragment(
 
         view.add_btn.setOnClickListener {
             if (view.todo_et.text.isNotEmpty()) {
-                todoViewModel.insertTodoData(getDate(cal), view.todo_et.text.toString())
+                todoViewModel.insertTodoData(
+                    TodoData(
+                        System.currentTimeMillis(),
+                        getDate(cal),
+                        view.todo_et.text.toString(),
+                        false
+                    )
+                )
                 view.todo_et.text.clear()
             }
             todoViewModel.getTodoData(getDate(cal))

@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.room
+package com.jaeyoung.d_time.room.todo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

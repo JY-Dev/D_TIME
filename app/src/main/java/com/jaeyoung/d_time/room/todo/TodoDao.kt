@@ -1,8 +1,7 @@
-package com.jaeyoung.d_time.room
+package com.jaeyoung.d_time.room.todo
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao

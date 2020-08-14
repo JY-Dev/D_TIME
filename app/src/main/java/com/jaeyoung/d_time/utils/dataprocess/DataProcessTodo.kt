@@ -1,28 +1,29 @@
-package com.jaeyoung.d_time.utils
+package com.jaeyoung.d_time.utils.dataprocess
 
 import android.content.Context
-import com.jaeyoung.d_time.callback.TodoDataCallback
-import com.jaeyoung.d_time.room.TodoData
-import com.jaeyoung.d_time.room.TodoDataDB
+import com.jaeyoung.d_time.callback.DBChangeCallback
+import com.jaeyoung.d_time.callback.TodoDBGetCallback
+import com.jaeyoung.d_time.room.todo.TodoData
+import com.jaeyoung.d_time.room.todo.TodoDataDB
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Room DataProcessing (Todo)
+ * Room DataProcessing
  */
-class DataProcess(context: Context) {
+class DataProcessTodo(context: Context) {
     private val mContext = context
 
     /**
      * Insert TodoData
      * TodoData(PrimaryKey:Long, Date : String, Title: String, isClear : Boolean)
      */
-    fun insertTodoData(date: String, title: String, todoDataCallback: TodoDataCallback) {
+    fun insertTodoData(todoData: TodoData, DBChangeCallback: DBChangeCallback) {
         val a = Observable.just(TodoDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
-                db?.getTodoDao()?.insert(TodoData(System.currentTimeMillis(), date, title, false))
-                getTodoData(todoDataCallback, date)
+                db?.getTodoDao()?.insert(todoData)
+                DBChangeCallback.changed()
             }
     }
 
@@ -30,11 +31,11 @@ class DataProcess(context: Context) {
      * Get TodoData
      * TodoData(PrimaryKey:Long, Date : String, Title: String, isClear : Boolean)
      */
-    fun getTodoData(todoDataCallback: TodoDataCallback, date: String) {
+    fun getTodoData(todoDBGetCallback: TodoDBGetCallback, date: String) {
         val a = Observable.just(TodoDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
-                db?.getTodoDao()?.getTodoData(date)?.let { it1 -> todoDataCallback.finish(it1) }
+                db?.getTodoDao()?.getTodoData(date)?.let { data -> todoDBGetCallback.finish(data) }
             }
     }
 
@@ -56,12 +57,11 @@ class DataProcess(context: Context) {
      * Delete TodoData
      * TodoData(PrimaryKey:Long, Date : String, Title: String, isClear : Boolean)
      */
-    fun deleteTodoData(date: String, primaryKey: Long, todoDataCallback: TodoDataCallback) {
+    fun deleteTodoData(primaryKey: Long) {
         val a = Observable.just(TodoDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
                 db?.getTodoDao()?.deleteTodoData(primaryKey)
             }
-        getTodoData(todoDataCallback, date)
     }
 }

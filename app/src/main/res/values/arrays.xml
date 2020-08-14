@@ -19,7 +19,7 @@
     </array>
 
     <array name="edit_image">
-        <item>@drawable/paint_brush</item>
+        <item>@drawable/photograph</item>
         <item>@drawable/photo</item>
     </array>
 

@@ -2,17 +2,13 @@ package com.jaeyoung.d_time.adapter
 
 import android.content.Context
 import android.graphics.Paint
-import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.jaeyoung.d_time.room.TodoData
+import com.jaeyoung.d_time.room.todo.TodoData
 import com.jaeyoung.d_time.viewModel.TodoViewModel
 import kotlinx.android.synthetic.main.todo_item.view.*
 
@@ -57,7 +53,7 @@ class TodoAdapter(context: Context,todoViewModel: TodoViewModel) : RecyclerView.
         notifyDataSetChanged()
     }
 
-    fun getItem(position: Int) : TodoData{
+    fun getItem(position: Int) : TodoData {
         return todoData[position]
     }
 }

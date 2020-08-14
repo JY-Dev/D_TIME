@@ -1,12 +1,13 @@
 package com.jaeyoung.d_time.application
 
 import android.app.Application
-import com.jaeyoung.d_time.utils.DataProcess
+import com.jaeyoung.d_time.utils.CameraUtil
+import com.jaeyoung.d_time.utils.dataprocess.DataProcessDiary
+import com.jaeyoung.d_time.utils.dataprocess.DataProcessTodo
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
-import java.util.*
 
 class MyApplication : Application() {
     override fun onCreate() {
@@ -20,7 +21,17 @@ class MyApplication : Application() {
 
     val module = module {
         single {
-            DataProcess(applicationContext)
+            DataProcessTodo(
+                applicationContext
+            )
+        }
+        single {
+            DataProcessDiary(
+                applicationContext
+            )
+        }
+        single {
+            CameraUtil(applicationContext)
         }
     }
 }

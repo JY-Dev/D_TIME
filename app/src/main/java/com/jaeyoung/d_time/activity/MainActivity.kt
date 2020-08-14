@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
      * UI Init
      */
     private fun viewInit(){
-        main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application),DiaryFragment(this),TimeTableFragment(this)))
+        main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application),DiaryFragment(this,application),TimeTableFragment(this)))
         main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
             }
