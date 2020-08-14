@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.adapter
+package com.jaeyoung.d_time.adapter.todo
 
 import android.content.Context
 import android.graphics.Paint
@@ -9,7 +9,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jaeyoung.d_time.room.todo.TodoData
-import com.jaeyoung.d_time.viewModel.TodoViewModel
+import com.jaeyoung.d_time.viewModel.todo.TodoViewModel
 import kotlinx.android.synthetic.main.todo_item.view.*
 
 

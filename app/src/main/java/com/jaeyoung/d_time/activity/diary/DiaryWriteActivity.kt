@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.activity
+package com.jaeyoung.d_time.activity.diary
 
 import android.app.Activity
 import android.content.Intent
@@ -15,13 +15,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.adapter.DiarySpinnerAdapter
+import com.jaeyoung.d_time.adapter.diary.DiarySpinnerAdapter
 import com.jaeyoung.d_time.room.diary.DiaryData
 import com.jaeyoung.d_time.utils.CameraUtil
 import com.jaeyoung.d_time.utils.DiaryPopup
 import com.jaeyoung.d_time.utils.KeyBoardUtil
 import com.jaeyoung.d_time.utils.dp
-import com.jaeyoung.d_time.viewModel.DiaryWriteViewModel
+import com.jaeyoung.d_time.viewModel.diary.DiaryWriteViewModel
 import kotlinx.android.synthetic.main.activity_diary_write.*
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.diary_image_layout.view.*
@@ -101,11 +101,17 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         }
         weather_spinner.let {
-            it.adapter = DiarySpinnerAdapter(this,resources.obtainTypedArray(R.array.weather_image))
+            it.adapter = DiarySpinnerAdapter(
+                this,
+                resources.obtainTypedArray(R.array.weather_image)
+            )
             it.setOnTouchListener(touch)
         }
         emotion_spinner.let {
-            it.adapter = DiarySpinnerAdapter(this,resources.obtainTypedArray(R.array.emotion_image))
+            it.adapter = DiarySpinnerAdapter(
+                this,
+                resources.obtainTypedArray(R.array.emotion_image)
+            )
             it.setOnTouchListener(touch)
         }
     }

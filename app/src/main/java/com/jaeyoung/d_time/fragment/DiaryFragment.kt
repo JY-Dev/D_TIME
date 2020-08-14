@@ -3,7 +3,6 @@ package com.jaeyoung.d_time.fragment
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +12,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.activity.DiaryViewActivity
-import com.jaeyoung.d_time.activity.DiaryWriteActivity
-import com.jaeyoung.d_time.activity.MainActivity
-import com.jaeyoung.d_time.adapter.DiaryAdapter
+import com.jaeyoung.d_time.activity.diary.DiaryViewActivity
+import com.jaeyoung.d_time.activity.diary.DiaryWriteActivity
+import com.jaeyoung.d_time.activity.main.MainActivity
+import com.jaeyoung.d_time.adapter.diary.DiaryAdapter
 import com.jaeyoung.d_time.room.diary.DiaryData
-import com.jaeyoung.d_time.viewModel.DiaryViewModel
+import com.jaeyoung.d_time.viewModel.diary.DiaryViewModel
 import kotlinx.android.synthetic.main.fragment_diary.*
 import kotlinx.android.synthetic.main.fragment_diary.view.*
 import java.text.SimpleDateFormat

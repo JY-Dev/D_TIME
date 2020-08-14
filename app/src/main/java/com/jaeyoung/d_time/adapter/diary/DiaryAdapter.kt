@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.adapter
+package com.jaeyoung.d_time.adapter.diary
 
 import android.content.Context
 import android.view.LayoutInflater

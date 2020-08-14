@@ -14,7 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashActivity"></activity>
+        <activity android:name=".activity.diary.DiaryBookMarkActivity"></activity>
+        <activity android:name=".activity.splash.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -26,16 +33,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.DiaryWriteActivity" />
-        <activity android:name=".activity.DiaryViewActivity" />
+        <activity android:name=".activity.diary.DiaryWriteActivity" />
+        <activity android:name=".activity.diary.DiaryViewActivity" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

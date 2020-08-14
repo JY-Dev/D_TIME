@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.viewModel
+package com.jaeyoung.d_time.viewModel.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

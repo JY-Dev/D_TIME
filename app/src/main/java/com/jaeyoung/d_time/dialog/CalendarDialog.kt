@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.viewModel.CalendarViewModel
+import com.jaeyoung.d_time.viewModel.calendar.CalendarViewModel
 import kotlinx.android.synthetic.main.dialog_cal.*
 
 class CalendarDialog(context: Context,calendarViewModel: CalendarViewModel) : Dialog(context) {

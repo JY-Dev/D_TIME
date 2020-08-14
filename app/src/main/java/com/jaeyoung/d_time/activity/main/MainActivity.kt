@@ -1,20 +1,17 @@
-package com.jaeyoung.d_time.activity
+package com.jaeyoung.d_time.activity.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.adapter.MainPagerAdpater
+import com.jaeyoung.d_time.adapter.main.MainPagerAdpater
 import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.fragment.DiaryFragment
 import com.jaeyoung.d_time.fragment.TimeTableFragment
 import com.jaeyoung.d_time.fragment.TodoFragment
-import com.jaeyoung.d_time.viewModel.CalendarViewModel
-import com.jaeyoung.d_time.viewModel.TodoViewModel
+import com.jaeyoung.d_time.viewModel.calendar.CalendarViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -54,7 +51,15 @@ class MainActivity : AppCompatActivity() {
      * UI Init
      */
     private fun viewInit(){
-        main_viewpager.adapter = MainPagerAdpater(supportFragmentManager, mutableListOf(TodoFragment(this,application),DiaryFragment(this,application),TimeTableFragment(this)))
+        main_viewpager.adapter =
+            MainPagerAdpater(
+                supportFragmentManager,
+                mutableListOf(
+                    TodoFragment(this, application),
+                    DiaryFragment(this, application),
+                    TimeTableFragment(this)
+                )
+            )
         main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -85,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         else finish()
     }
 
-    fun getCalendarViewModel() : CalendarViewModel{
+    fun getCalendarViewModel() : CalendarViewModel {
         return calendarViewModel
     }
 

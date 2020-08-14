@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.activity.MainActivity
-import com.jaeyoung.d_time.adapter.TodoAdapter
-import com.jaeyoung.d_time.adapter.TodoItemDecoration
+import com.jaeyoung.d_time.activity.main.MainActivity
+import com.jaeyoung.d_time.adapter.todo.TodoAdapter
+import com.jaeyoung.d_time.adapter.todo.TodoItemDecoration
 import com.jaeyoung.d_time.room.todo.TodoData
-import com.jaeyoung.d_time.viewModel.TodoViewModel
+import com.jaeyoung.d_time.viewModel.todo.TodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,7 +47,8 @@ class TodoFragment(
     ): View {
         val view = inflater.inflate(R.layout.fragment_todo, container, false)
         linearLayoutManager = LinearLayoutManager(mContext)
-        itemDecoration = TodoItemDecoration(mContext)
+        itemDecoration =
+            TodoItemDecoration(mContext)
         imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         //View Model
         val androidViewModelFactory =
@@ -63,7 +64,8 @@ class TodoFragment(
         todoViewModel.changeStatus.observe(this, Observer {
             todoViewModel.getTodoData(getDate(cal))
         })
-        todoItemAdpater = TodoAdapter(mContext,todoViewModel)
+        todoItemAdpater =
+            TodoAdapter(mContext, todoViewModel)
         calViewModel.calData.observe(this, Observer {
             cal = it
             mainActivity.dismissCalendarDialog()

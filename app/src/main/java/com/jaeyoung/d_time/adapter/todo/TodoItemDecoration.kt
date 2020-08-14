@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.adapter
+package com.jaeyoung.d_time.adapter.todo
 
 import android.app.Activity
 import android.content.Context

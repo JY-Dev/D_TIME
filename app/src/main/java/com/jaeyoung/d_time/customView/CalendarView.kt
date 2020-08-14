@@ -2,7 +2,6 @@ package jaeyoung.kim.calendarview
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.viewModel.CalendarViewModel
+import com.jaeyoung.d_time.viewModel.calendar.CalendarViewModel
 import kotlinx.android.synthetic.main.top_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*

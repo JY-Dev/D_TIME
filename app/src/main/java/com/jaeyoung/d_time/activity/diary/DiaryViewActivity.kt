@@ -1,4 +1,4 @@
-package com.jaeyoung.d_time.activity
+package com.jaeyoung.d_time.activity.diary
 
 import android.content.Intent
 import android.content.res.TypedArray
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.R
-import com.jaeyoung.d_time.viewModel.DiaryViewModel
+import com.jaeyoung.d_time.viewModel.diary.DiaryViewModel
 import kotlinx.android.synthetic.main.activity_diary_view.*
 import kotlinx.android.synthetic.main.activity_diary_write.diary_date_tv
 import kotlinx.android.synthetic.main.activity_diary_write.image_layout

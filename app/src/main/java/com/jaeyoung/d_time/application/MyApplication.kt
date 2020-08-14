@@ -2,6 +2,7 @@ package com.jaeyoung.d_time.application
 
 import android.app.Application
 import com.jaeyoung.d_time.utils.CameraUtil
+import com.jaeyoung.d_time.utils.dataprocess.DataProcessBookMark
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessDiary
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessTodo
 import org.koin.android.ext.koin.androidContext
@@ -32,6 +33,11 @@ class MyApplication : Application() {
         }
         single {
             CameraUtil(applicationContext)
+        }
+        single {
+            DataProcessBookMark(
+                applicationContext
+            )
         }
     }
 }
