@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.lifecycle.LiveData
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.room.diary.bookmark.BookMark
 import com.jaeyoung.d_time.room.diary.bookmark.BookMarkData
 import kotlinx.android.synthetic.main.bookmark_item.view.*
 
 class BookMarkAdapter(context: Context) : BaseAdapter() {
-    private var bookMarkData = mutableListOf<BookMarkData>()
+    private var bookMarkData = mutableListOf<BookMark>()
     private val mContext = context
     private var deleteFlag = false
     private var deleteList = mutableListOf<Int>()
@@ -39,16 +40,16 @@ class BookMarkAdapter(context: Context) : BaseAdapter() {
         return bookMarkData.size
     }
 
-    fun addData(bookMark : BookMarkData) {
+    fun addData(bookMark : BookMark) {
         bookMarkData.add(bookMark)
         notifyDataSetChanged()
     }
 
-    fun setData(bookMarkList : MutableList<BookMarkData>) {
+    fun setData(bookMarkList : MutableList<BookMark>) {
         bookMarkData = bookMarkList
         notifyDataSetChanged()
     }
-    fun getData() : MutableList<BookMarkData>{
+    fun getData() : MutableList<BookMark>{
         return bookMarkData
     }
 

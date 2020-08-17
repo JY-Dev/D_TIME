@@ -9,18 +9,13 @@ import com.jaeyoung.d_time.room.diary.DiaryData
 @Dao
 interface BookMarkDao {
 
-    @Update
-    fun updateBookMarkData(bookMarkData : BookMarkData)
-
     @Insert
-    fun insertBookMarkData(bookMarkData: BookMarkData)
+    fun insertBookMark(bookMark: BookMark)
 
-    @Query("DELETE FROM BookMarkData WHERE `bookMark` =:bookMark")
-    fun deleteBookMarkData(bookMark: String)
+    @Query("DELETE FROM BookMark WHERE `bookMark` =:bookMark")
+    fun deleteBookMark(bookMark: String)
 
-    @Query("SELECT * FROM BookMarkData WHERE `bookMark` =:bookMark")
-    fun getBookMarkData(bookMark:String) : BookMarkData
+    @Query("SELECT * FROM BookMark")
+    fun getBookMark() : MutableList<BookMark>
 
-    @Query("SELECT * FROM BookMarkData")
-    fun getBookMarkAllData() : MutableList<BookMarkData>
 }

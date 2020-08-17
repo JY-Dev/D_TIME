@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase
  */
 @Database(entities = [BookMarkData::class],version = 1)
 abstract class BookMarkDataDB : RoomDatabase() {
-    abstract fun getBookMarkDao() : BookMarkDao
+    abstract fun getBookMarkDao() : BookMarkDataDao
     companion object{
         private var INSTANCE : BookMarkDataDB? = null
 

@@ -12,6 +12,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.diary.DiaryBookMarkActivity
 import com.jaeyoung.d_time.activity.diary.DiaryViewActivity
 import com.jaeyoung.d_time.activity.diary.DiaryWriteActivity
 import com.jaeyoung.d_time.activity.main.MainActivity
@@ -65,6 +66,9 @@ class DiaryFragment(context: Context, application: Application) : Fragment() {
             }
         }
 
+        view.bookmark_btn.setOnClickListener {
+            startActivity(Intent(mContext,DiaryBookMarkActivity::class.java))
+        }
         view.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
