@@ -58,6 +58,7 @@ class DiaryBookMarkActivity : AppCompatActivity() {
                 bookMarkList.forEach {
                     bookMarkViewModel.deleteBookMark(it.bookMark)
                 }
+                bookMarkAdapter.clearDelList()
             }
         }
         bookMarkViewModel.getBookMark()

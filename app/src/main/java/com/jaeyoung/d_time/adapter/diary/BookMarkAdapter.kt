@@ -65,6 +65,10 @@ class BookMarkAdapter(context: Context) : BaseAdapter() {
         }
         notifyDataSetChanged()
     }
+
+    fun clearDelList(){
+        deleteList.clear()
+    }
 }
 
 
