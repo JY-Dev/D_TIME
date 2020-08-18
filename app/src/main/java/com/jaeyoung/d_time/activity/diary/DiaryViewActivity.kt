@@ -81,6 +81,7 @@ class DiaryViewActivity : AppCompatActivity() {
 
     private fun layoutInit() {
         del_btn.setOnClickListener {
+            diaryViewModel.deleteIdBookMarkData(primaryKey)
             diaryViewModel.deleteData(primaryKey)
         }
 

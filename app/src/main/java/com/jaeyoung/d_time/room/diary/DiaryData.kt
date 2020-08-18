@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class DiaryData(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey val id: Long,
     val date: String,
     val title: String,
     val subTitle: String,

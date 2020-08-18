@@ -23,9 +23,4 @@
         <item>@drawable/photo</item>
     </array>
 
-    <array name="more_image">
-        <item>@drawable/save</item>
-        <item>@drawable/icons_8_bookmark_240</item>
-        <item>@drawable/icons_8_trash_256</item>
-    </array>
 </resources>

@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 class DataProcessBookMark(context: Context) {
     private val mContext = context
 
-    fun insertBookMarkData(
+    fun insertBookMark(
         bookMarkData: BookMark,
         dbChangeCallback: DBChangeCallback
     ) {
@@ -22,6 +22,18 @@ class DataProcessBookMark(context: Context) {
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
                 db?.getBookMarkDao()?.insertBookMark(bookMarkData)
+                dbChangeCallback.changed()
+            }
+    }
+
+    fun insertBookMarkData(
+        bookMarkData: BookMarkData,
+        dbChangeCallback: DBChangeCallback
+    ) {
+        val a = Observable.just(BookMarkDataDB.getInstance(mContext))
+            .subscribeOn(Schedulers.io())
+            .subscribe { db ->
+                db?.getBookMarkDao()?.insertBookMarkData(bookMarkData)
                 dbChangeCallback.changed()
             }
     }
@@ -44,13 +56,46 @@ class DataProcessBookMark(context: Context) {
             }
     }
 
+    fun getIdBookMarkData(id:Long,bookMarkDbAllGetCallback: BookMarkDbAllGetCallback) {
+        val a = Observable.just(BookMarkDataDB.getInstance(mContext))
+            .subscribeOn(Schedulers.io())
+            .subscribe { db ->
+                db?.getBookMarkDao()?.getBookMarkIdData(id)
+                    ?.let { data -> bookMarkDbAllGetCallback.finish(data) }
+            }
+    }
 
-    fun deleteBookMarkData(bookMark: String, dbChangeCallback: DBChangeCallback) {
+    fun getBookMarkData(bookMark:String,bookMarkDbAllGetCallback: BookMarkDbAllGetCallback) {
+        val a = Observable.just(BookMarkDataDB.getInstance(mContext))
+            .subscribeOn(Schedulers.io())
+            .subscribe { db ->
+                db?.getBookMarkDao()?.getBookMarkData(bookMark)
+                    ?.let { data -> bookMarkDbAllGetCallback.finish(data) }
+            }
+    }
+
+    fun deleteBookMark(bookMark: String, dbChangeCallback: DBChangeCallback) {
         val a = Observable.just(BookMarkDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
                 db?.getBookMarkDao()?.deleteBookMark(bookMark)
                 dbChangeCallback.changed()
+            }
+    }
+
+    fun deleteBookMarkData(id:Long,bookMark: String) {
+        val a = Observable.just(BookMarkDataDB.getInstance(mContext))
+            .subscribeOn(Schedulers.io())
+            .subscribe { db ->
+                db?.getBookMarkDao()?.deleteBookMarkData(id,bookMark)
+            }
+    }
+
+    fun deleteIdBookMarkData(id:Long) {
+        val a = Observable.just(BookMarkDataDB.getInstance(mContext))
+            .subscribeOn(Schedulers.io())
+            .subscribe { db ->
+                db?.getBookMarkDao()?.deleteIdBookMarkData(id)
             }
     }
 

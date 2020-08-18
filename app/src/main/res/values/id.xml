@@ -2,19 +2,11 @@
 <resources>
     <item name="camera_btn" type="id" />
     <item name="photo_btn" type="id" />
-    <item name="save_btn" type="id"/>
-    <item name="bookmark_btn" type="id"/>
-    <item name="delete_btn" type="id"/>
 
     <array name="edit_id">
         <item>@id/camera_btn</item>
         <item>@id/photo_btn</item>
     </array>
 
-    <array name="more_id">
-        <item>@id/save_btn</item>
-        <item>@id/bookmark_btn</item>
-        <item>@id/delete_btn</item>
-    </array>
 
 </resources>

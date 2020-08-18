@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.main.MainActivity">
+    tools:context=".activity.MainActivity">
 
 
 
@@ -59,7 +59,6 @@
 
 
             <ScrollView
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -69,20 +68,18 @@
                     android:orientation="vertical">
 
                     <!--Top bar-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:id="@+id/date_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/plus_btn_back"
                             android:layout_marginEnd="25dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
                             android:padding="10dp">
 
                             <TextView
@@ -98,11 +95,7 @@
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/date_view">
+                            android:layout_height="wrap_content">
 
 
                             <ImageButton
@@ -119,12 +112,9 @@
 
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:padding="2dp"
                             android:orientation="horizontal"
                             android:gravity="center"
                             android:background="@drawable/plus_btn_back">
@@ -133,8 +123,7 @@
                                 android:id="@+id/weather_spinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="5dp"
                                 android:popupBackground="@drawable/plus_btn_back"
                                 android:dropDownWidth="60dp"
                                 android:dropDownVerticalOffset="50dp"
@@ -152,8 +141,7 @@
                                 android:id="@+id/emotion_spinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
+                                android:layout_marginEnd="5dp"
                                 android:popupBackground="@drawable/plus_btn_back"
                                 style="@style/SpinnerAsEditText"
                                 android:dropDownWidth="60dp"
@@ -162,8 +150,16 @@
 
                         </LinearLayout>
 
+                        <ImageButton
+                            android:id="@+id/bookmark_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/plus_btn_back"
+                            android:layout_marginStart="10dp"
+                            android:padding="7dp"
+                            android:src="@drawable/icons_8_bookmark_240" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/title_et"

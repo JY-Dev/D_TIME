@@ -1,5 +1,6 @@
 package com.jaeyoung.d_time.activity.diary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,21 +10,40 @@ import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.adapter.diary.BookMarkAdapter
 import com.jaeyoung.d_time.room.diary.bookmark.BookMark
+import com.jaeyoung.d_time.room.diary.bookmark.BookMarkData
 import com.jaeyoung.d_time.viewModel.diary.BookMarkViewModel
 import kotlinx.android.synthetic.main.activity_diary_book_mark.*
+import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.fragment_todo.add_btn
 
 class DiaryBookMarkActivity : AppCompatActivity() {
     lateinit var bookMarkViewModel: BookMarkViewModel
     var bookMarkList = mutableListOf<BookMark>()
+    var bookMarkTitleList = mutableListOf<String>()
     lateinit var bookMarkAdapter : BookMarkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_book_mark)
+        toolBarInit()
         viewModelInit()
         layoutInit()
+    }
 
+    /**
+     * Toolbar Init
+     */
+    private fun toolBarInit(){
+        setSupportActionBar(app_toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_title.text = "BOOKMARK"
+        back_btn.visibility = View.VISIBLE
+        back_btn.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                finish()
+            }
+        }
     }
 
     private fun layoutInit(){
@@ -41,25 +61,35 @@ class DiaryBookMarkActivity : AppCompatActivity() {
 
         add_bookmark_btn.setOnClickListener {
             if(bookmark_et.text.isNotEmpty()){
-                val bookMarkData = BookMark(bookmark_et.text.toString())
-                bookMarkViewModel.inserBookMark(bookMarkData)
-                bookmark_et.text.clear()
+                if(!bookMarkTitleList.contains(bookmark_et.text.toString())){
+                    val bookMarkData = BookMark(bookmark_et.text.toString())
+                    bookMarkViewModel.inserBookMark(bookMarkData)
+                    bookmark_et.text.clear()
+                    Toast.makeText(this,"Bookmark Added",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this,"Already Exists",Toast.LENGTH_SHORT).show()
+                }
+
             } else {
-                Toast.makeText(this,"Input BookMark",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"BookMark Is Empty",Toast.LENGTH_SHORT).show()
             }
         }
 
         del_btn.setOnClickListener {
-            if(bookMarkAdapter.deleteFlag()) add_btn.visibility = View.GONE
+            if(bookMarkAdapter.deleteFlag()) {
+                add_btn.visibility = View.GONE
+                Toast.makeText(this,"Delete Mode",Toast.LENGTH_SHORT).show()
+            }
             else {
                 add_btn.visibility = View.VISIBLE
                 bookMarkAdapter.removeList()
-                bookMarkList = bookMarkAdapter.getData()
-                bookMarkList.forEach {
-                    bookMarkViewModel.deleteBookMark(it.bookMark)
-                }
-                bookMarkAdapter.clearDelList()
+                Toast.makeText(this,"Delete Complete",Toast.LENGTH_SHORT).show()
             }
+        }
+        bookmark_list.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this,DiaryBookMarkDetailActivity::class.java)
+            intent.putExtra("bookmark",bookMarkTitleList[position])
+            startActivity(intent)
         }
         bookMarkViewModel.getBookMark()
     }
@@ -71,11 +101,18 @@ class DiaryBookMarkActivity : AppCompatActivity() {
             BookMarkViewModel::class.java)
         bookMarkViewModel.bookMarkTitle.observe(this, Observer {
             bookMarkList = it
+            it.filter { !bookMarkTitleList.contains(it.bookMark) }.forEach {
+                bookMarkTitleList.add(it.bookMark)
+            }
             bookMarkAdapter.setData(it)
         })
+
         bookMarkViewModel.status.observe(this, Observer {
-            Toast.makeText(this,"okok",Toast.LENGTH_LONG).show()
             bookMarkViewModel.getBookMark()
         })
+    }
+
+    fun delData(bookMark : String){
+        bookMarkViewModel.deleteBookMark(bookMark)
     }
 }

@@ -9,12 +9,14 @@ import com.jaeyoung.d_time.callback.DiaryModifyDbGetCallback
 import com.jaeyoung.d_time.callback.TodoDBGetCallback
 import com.jaeyoung.d_time.room.diary.DiaryData
 import com.jaeyoung.d_time.room.todo.TodoData
+import com.jaeyoung.d_time.utils.dataprocess.DataProcessBookMark
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessDiary
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class DiaryViewModel : ViewModel(),KoinComponent {
     val dataProcess : DataProcessDiary by inject()
+    val dataProcessBookMark: DataProcessBookMark by inject()
     private val diaryListData = MutableLiveData<MutableList<DiaryData>>()
     val diaryList : LiveData<MutableList<DiaryData>> get() = diaryListData
     private val diaryData = MutableLiveData<DiaryData>()
@@ -45,5 +47,9 @@ class DiaryViewModel : ViewModel(),KoinComponent {
                 statusData.postValue("changed")
             }
         })
+    }
+
+    fun deleteIdBookMarkData(id:Long) {
+        dataProcessBookMark.deleteIdBookMarkData(id)
     }
 }
