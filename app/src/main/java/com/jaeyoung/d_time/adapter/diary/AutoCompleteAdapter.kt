@@ -37,6 +37,7 @@ class AutoCompleteAdapter(context: Context, diaryData:MutableList<DiaryData>) : 
                 }
             }
             results.values = suggestions
+
             results.count = suggestions.size
             return results
         }
