@@ -23,12 +23,23 @@ class DiaryViewModel : ViewModel(),KoinComponent {
     val diary : LiveData<DiaryData> get() = diaryData
     private val statusData = MutableLiveData<String>()
     val status : LiveData<String> get() = statusData
+    private val diaryAllListData = MutableLiveData<MutableList<DiaryData>>()
+    val diaryAllList : LiveData<MutableList<DiaryData>> get() = diaryAllListData
 
     fun getDiaryData(date: String){
         dataProcess.getDiaryData(date,object :
             DiaryDbGetCallback {
             override fun finish(diaryData: MutableList<DiaryData>) {
                 diaryListData.postValue(diaryData)
+            }
+        })
+    }
+
+    fun getAllDiaryData(){
+        dataProcess.getAllDiaryData(object :
+            DiaryDbGetCallback {
+            override fun finish(diaryData: MutableList<DiaryData>) {
+                diaryAllListData.postValue(diaryData)
             }
         })
     }

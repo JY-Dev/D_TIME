@@ -52,7 +52,6 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:background="@drawable/plus_btn_back">
 

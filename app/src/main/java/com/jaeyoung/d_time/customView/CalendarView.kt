@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -26,6 +27,9 @@ class CalendarView : LinearLayout {
     private var currentDate = cal
     private var gridView : GridView = GridView(context)
     private var calViewModel : CalendarViewModel? = null
+    private var x1 = 0f
+    private var x2 = 0f
+    lateinit var topDateView : View
 
     constructor(context: Context) : super(context) {
         init()
@@ -79,7 +83,7 @@ class CalendarView : LinearLayout {
 
     private fun createTopDateView(): View {
         val inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val topDateView = inflator.inflate(R.layout.top_layout, null)
+        topDateView = inflator.inflate(R.layout.top_layout, null)
         topDateView.date_tv.text = getDate(cal)
         topDateView.pre_btn.setOnClickListener {
             downToMonth()
@@ -95,7 +99,7 @@ class CalendarView : LinearLayout {
     }
 
     private fun createGridView(): GridView {
-        val lp = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val lp = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         gridView.setOnItemClickListener { adapterView, view, position, l ->
             if(adapterView.getItemAtPosition(position)!=0){
                 selCal.set(year, month, adapterView.getItemAtPosition(position) as Int, 0, 0, 0)
@@ -106,14 +110,41 @@ class CalendarView : LinearLayout {
             }
 
         }
-        val dp = pixelToDp(1F)
         gridView.apply {
             layoutParams = lp
             numColumns = 7
             adapter = calendarAdapter
             isVerticalScrollBarEnabled = false
+            stretchMode = GridView.STRETCH_COLUMN_WIDTH
             //setSelector(R.drawable.list_selector)
             choiceMode = AbsListView.CHOICE_MODE_SINGLE
+        }
+        gridView.setOnTouchListener { _, event ->
+            when(event?.action){
+                MotionEvent.ACTION_DOWN -> {
+                    x1 = event.x
+                }
+                MotionEvent.ACTION_UP -> {
+                    x2 = event.x
+                    val deltaX = x2 - x1
+                    if(Math.abs(deltaX) > 150){
+                        if(x2>x1) {
+                            downToMonth()
+                            topDateView.date_tv.text = getDate(cal)
+                            calendarAdapter.calUpdate(cal)
+                        }
+                        else {
+                            upToMonth()
+                            topDateView.date_tv.text = getDate(cal)
+                            calendarAdapter.calUpdate(cal)
+                        }
+                    }
+                }
+                else -> {
+
+                }
+            }
+            false
         }
         return gridView
     }

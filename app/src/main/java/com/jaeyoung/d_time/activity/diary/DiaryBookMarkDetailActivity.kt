@@ -77,9 +77,9 @@ class DiaryBookMarkDetailActivity : AppCompatActivity() {
         bookMarkViewModel.bookMarkList.observe(this, Observer {
             bookMarkDetailAdapter.clearList()
             bookMarkList = it
-            it.forEachIndexed {index , it ->
-                if(index>0)idQueue.push(it.id)
-                else diaryViewModel.getDiaryOneData(it.id)
+            it.forEachIndexed {index , data ->
+                if(index>0)idQueue.push(data.id)
+                else diaryViewModel.getDiaryOneData(data.id)
             }
         })
 

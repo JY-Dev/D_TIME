@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -32,28 +32,61 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp">
 
+                <ImageButton
+                    android:id="@+id/bookmark_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/plus_btn_back"
+                    android:padding="10dp"
+                    android:src="@drawable/icons_8_bookmark_240" />
+
+                <ImageButton
+                    android:id="@+id/save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/plus_btn_back"
+                    android:padding="12dp"
+                    android:src="@drawable/save" />
+
+<!--
                 <Button
                     android:id="@+id/save_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/plus_btn_back"
                     android:layout_alignParentEnd="true"
                     android:textSize="20sp"
                     android:fontFamily="@font/font"
-                    android:text="SAVE"/>
+                    android:text="SAVE"/>-->
 
             </RelativeLayout>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/diary_button_back"
             android:padding="15dp"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
 
@@ -68,19 +101,21 @@
                     android:orientation="vertical">
 
                     <!--Top bar-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_gravity="center"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/test"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             android:background="@drawable/plus_btn_back"
                             android:layout_marginEnd="25dp"
-                            android:padding="10dp">
+                            android:padding="15dp">
 
                             <TextView
                                 android:id="@+id/diary_date_tv"
@@ -95,7 +130,10 @@
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/test">
 
 
                             <ImageButton
@@ -103,8 +141,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/plus_btn_back"
-                                android:layout_marginEnd="10dp"
-                                android:padding="5dp"
+                                android:layout_marginStart="20dp"
+                                android:padding="10dp"
                                 android:src="@drawable/outline_add_black_48" />
 
 
@@ -112,20 +150,24 @@
 
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:orientation="horizontal"
-                            android:gravity="center"
+                            android:padding="2dp"
                             android:background="@drawable/plus_btn_back">
 
                             <Spinner
                                 android:id="@+id/weather_spinner"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
                                 android:popupBackground="@drawable/plus_btn_back"
                                 android:dropDownWidth="60dp"
+                                android:padding="5dp"
                                 android:dropDownVerticalOffset="50dp"
                                 style="@style/SpinnerAsEditText"
                                 android:spinnerMode="dropdown"/>
@@ -140,8 +182,10 @@
                             <Spinner
                                 android:id="@+id/emotion_spinner"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
+                                android:padding="5dp"
                                 android:popupBackground="@drawable/plus_btn_back"
                                 style="@style/SpinnerAsEditText"
                                 android:dropDownWidth="60dp"
@@ -150,16 +194,9 @@
 
                         </LinearLayout>
 
-                        <ImageButton
-                            android:id="@+id/bookmark_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/plus_btn_back"
-                            android:layout_marginStart="10dp"
-                            android:padding="7dp"
-                            android:src="@drawable/icons_8_bookmark_240" />
 
-                    </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <EditText
                         android:id="@+id/title_et"

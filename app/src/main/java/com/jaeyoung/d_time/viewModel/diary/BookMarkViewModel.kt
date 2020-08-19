@@ -78,7 +78,12 @@ class BookMarkViewModel : ViewModel(), KoinComponent {
     }
 
     fun deleteBookMarkData(id:Long,bookMark: String) {
-        dataProcessBookMark.deleteBookMarkData(id,bookMark)
+        dataProcessBookMark.deleteBookMarkData(id,bookMark, object : DBChangeCallback{
+            override fun changed() {
+                statusData.postValue("change")
+            }
+
+        })
     }
 
     fun deleteIdBookMarkData(id:Long) {

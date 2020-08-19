@@ -1,7 +1,9 @@
 package com.jaeyoung.d_time.activity.main
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
@@ -21,12 +23,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var calendarDialog: CalendarDialog
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolBarInit()
         viewModelInit()
         viewInit()
+
     }
 
     /**
@@ -83,6 +87,10 @@ class MainActivity : AppCompatActivity() {
                 drawer_layout.openDrawer(drawer)
             }
         }
+
+        back_drawer_btn.setOnClickListener {
+            drawer_layout.closeDrawer(drawer)
+        }
     }
 
     override fun onBackPressed() {
@@ -101,4 +109,6 @@ class MainActivity : AppCompatActivity() {
     fun dismissCalendarDialog(){
         calendarDialog.dismiss()
     }
+
+
 }

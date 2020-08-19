@@ -92,11 +92,12 @@
                         android:background="@drawable/plus_btn_back"
                         android:gravity="center">
 
+
                         <Button
                             android:id="@+id/date_btn"
-                            android:layout_width="17dp"
-                            android:layout_height="11dp"
-                            android:background="@drawable/calendar" />
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/icons_8_calendar_384" />
                     </LinearLayout>
 
 
@@ -183,6 +184,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginBottom="20dp"
                     android:padding="16dp"
                     android:background="@drawable/plus_btn_back">
 

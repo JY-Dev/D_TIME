@@ -4,8 +4,10 @@ import android.content.Intent
 import android.content.res.TypedArray
 import android.net.Uri
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +29,7 @@ class DiaryViewActivity : AppCompatActivity() {
     lateinit var weatherImgArray: TypedArray
     var primaryKey = 0L
     var date = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

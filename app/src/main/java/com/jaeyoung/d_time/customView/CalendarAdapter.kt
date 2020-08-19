@@ -29,8 +29,8 @@ class CalendarAdapter(context: Context) : BaseAdapter() {
     override fun getView(position: Int, view: View?, p2: ViewGroup?): View {
         val inflator = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val mView = view ?: inflator.inflate(R.layout.item_layout,null)
-        if(selPostion==position&&checkFlag) mView.setBackgroundResource(R.drawable.item_border)
-        else mView.setBackgroundColor(Color.WHITE)
+        if(selPostion==position&&checkFlag) mView.date_back.setBackgroundResource(R.drawable.item_border)
+        else mView.date_back.setBackgroundColor(Color.WHITE)
         if(day[position]!=0) mView.day_tv.text = day[position].toString()
         else mView.day_tv.text = ""
         return mView

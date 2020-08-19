@@ -83,11 +83,12 @@ class DataProcessBookMark(context: Context) {
             }
     }
 
-    fun deleteBookMarkData(id:Long,bookMark: String) {
+    fun deleteBookMarkData(id:Long,bookMark: String , dbChangeCallback: DBChangeCallback) {
         val a = Observable.just(BookMarkDataDB.getInstance(mContext))
             .subscribeOn(Schedulers.io())
             .subscribe { db ->
                 db?.getBookMarkDao()?.deleteBookMarkData(id,bookMark)
+                dbChangeCallback.changed()
             }
     }
 

@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="1dp"
-    android:layout_columnWeight="1"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/back_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:id="@+id/date_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/day_tv"
@@ -22,12 +17,10 @@
             android:text="1"
             android:fontFamily="@font/font"
             android:textColor="#000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_margin="3dp"/>
-
-
-
+            android:textSize="15sp"/>
     </LinearLayout>
+
+
+
 
 </LinearLayout>
