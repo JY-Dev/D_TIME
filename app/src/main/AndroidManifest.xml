@@ -9,20 +9,24 @@
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/splash"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.diary.DiaryBookMarkDetailActivity"></activity>
-        <activity android:name=".activity.diary.DiaryBookMarkSelActivity"></activity>
-        <activity android:name=".activity.diary.DiaryBookMarkActivity" />
-        <activity android:name=".activity.splash.SplashActivity">
+        <activity android:name=".activity.timetable.TimeTableActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.diary.DiarySearchActivity" />
+        <activity android:name=".activity.diary.DiaryBookMarkDetailActivity" />
+        <activity android:name=".activity.diary.DiaryBookMarkSelActivity" />
+        <activity android:name=".activity.diary.DiaryBookMarkActivity" />
+        <activity android:name=".activity.splash.SplashActivity">
+
         </activity>
 
         <provider
@@ -39,7 +43,7 @@
         <activity android:name=".activity.diary.DiaryViewActivity" />
         <activity
             android:name=".activity.main.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

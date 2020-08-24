@@ -115,7 +115,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             android:background="@drawable/plus_btn_back"
                             android:layout_marginEnd="25dp"
-                            android:padding="15dp">
+                            android:padding="10dp">
 
                             <TextView
                                 android:id="@+id/diary_date_tv"
@@ -142,7 +142,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/plus_btn_back"
                                 android:layout_marginStart="20dp"
-                                android:padding="10dp"
+                                android:padding="5dp"
                                 android:src="@drawable/outline_add_black_48" />
 
 
@@ -159,27 +159,46 @@
                             android:padding="2dp"
                             android:background="@drawable/plus_btn_back">
 
-                            <Spinner
-                                android:id="@+id/weather_spinner"
+                            <ImageButton
+                                android:id="@+id/weather_btn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:background="#fff"
+                                android:padding="5dp"
+                                android:src="@drawable/icons_8_sun_500" />
+                           <!-- <Spinner
+                                android:id="@+id/weather_spinner"
+                                style="@style/SpinnerAsEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="14dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:popupBackground="@drawable/plus_btn_back"
                                 android:dropDownWidth="60dp"
-                                android:padding="5dp"
                                 android:dropDownVerticalOffset="50dp"
-                                style="@style/SpinnerAsEditText"
-                                android:spinnerMode="dropdown"/>
+                                android:padding="5dp"
+                                android:popupBackground="@drawable/plus_btn_back"
+                                android:spinnerMode="dropdown" />-->
 
                             <View
                                 android:layout_width="2dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginBottom="7dp"
                                 android:background="#000"/>
 
-                            <Spinner
+                            <ImageButton
+                                android:id="@+id/emotion_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_gravity="center_vertical"
+                                android:background="#fff"
+                                android:padding="5dp"
+                                android:src="@drawable/smile" />
+                           <!-- <Spinner
                                 android:id="@+id/emotion_spinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -190,7 +209,7 @@
                                 style="@style/SpinnerAsEditText"
                                 android:dropDownWidth="60dp"
                                 android:dropDownVerticalOffset="50dp"
-                                android:spinnerMode="dropdown"/>
+                                android:spinnerMode="dropdown"/>-->
 
                         </LinearLayout>
 

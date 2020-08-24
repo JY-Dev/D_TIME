@@ -78,7 +78,7 @@
                             android:layout_centerVertical="true"
                             android:background="@drawable/plus_btn_back"
                             android:layout_marginEnd="25dp"
-                            android:padding="15dp">
+                            android:padding="10dp">
 
                             <TextView
                                 android:id="@+id/diary_date_tv"
@@ -97,7 +97,7 @@
                             android:layout_alignParentEnd="true"
                             android:gravity="center_vertical"
                             android:background="@drawable/plus_btn_back"
-                            android:padding="10dp"
+                            android:padding="5dp"
                             android:orientation="horizontal">
 
                             <ImageView

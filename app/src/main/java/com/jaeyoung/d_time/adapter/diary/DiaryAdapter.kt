@@ -20,7 +20,7 @@ class DiaryAdapter(context:Context) : BaseAdapter() {
         return view
     }
 
-    override fun getItem(p0: Int): Any {
+    override fun getItem(p0: Int): DiaryData {
         return if(!filterFlag)diaryDataList[p0] else filterDataList[p0]
     }
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/plus_btn_back">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/start_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#000"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/font"
+                android:text="09:00"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#000"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/font"
+                android:text=" - "/>
+
+            <TextView
+                android:id="@+id/end_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#000"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/font"
+                android:text="13:00"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="85dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="#000"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="@font/font"
+            android:textColor="#000"
+            android:text="Meet Sam in front of the Station"/>
+
+    </LinearLayout>
+
+</LinearLayout>

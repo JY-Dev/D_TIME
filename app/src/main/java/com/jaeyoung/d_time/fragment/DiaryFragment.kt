@@ -13,15 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.activity.diary.DiaryBookMarkActivity
+import com.jaeyoung.d_time.activity.diary.DiarySearchActivity
 import com.jaeyoung.d_time.activity.diary.DiaryViewActivity
 import com.jaeyoung.d_time.activity.diary.DiaryWriteActivity
 import com.jaeyoung.d_time.activity.main.MainActivity
 import com.jaeyoung.d_time.adapter.diary.AutoCompleteAdapter
 import com.jaeyoung.d_time.adapter.diary.DiaryAdapter
 import com.jaeyoung.d_time.room.diary.DiaryData
-import com.jaeyoung.d_time.utils.dp
 import com.jaeyoung.d_time.viewModel.diary.DiaryViewModel
-import kotlinx.android.synthetic.main.fragment_diary.*
 import kotlinx.android.synthetic.main.fragment_diary.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,46 +63,16 @@ class DiaryFragment(context: Context, application: Application) : Fragment() {
         searchViewText.typeface = myTypeface
 
         view.search_btn.setOnClickListener {
-     /*       if(search.visibility == View.GONE) search.visibility = View.VISIBLE
-            else {
-                search.visibility = View.GONE
-                diaryAdapter.filterClear()
-                view.search.setQuery("",false)
-
-            }*/
-            if(view.search_et.visibility == View.GONE) diaryViewModel.getAllDiaryData()
-            else{
-                view.search_et.text.clear()
-                view.search_et.visibility = View.GONE
-            }
+            startActivity(Intent(mContext,DiarySearchActivity::class.java))
         }
         diaryViewModel.diaryAllList.observe(this, androidx.lifecycle.Observer {
             autoCompleteAdapter.setData(it)
             view.search_et.visibility = View.VISIBLE
         })
-        view.search_et.dropDownVerticalOffset = 10.dp
-        view.search_et.setOnItemClickListener { _, _, position, _ ->
-            view.search_et.text.clear()
-            view.search_et.visibility = View.GONE
-            val intent = Intent(mContext,DiaryViewActivity::class.java)
-            intent.putExtra("primary",autoCompleteAdapter.getItem(position)?.id)
-            startActivity(intent)
-        }
 
         view.bookmark_btn.setOnClickListener {
             startActivity(Intent(mContext,DiaryBookMarkActivity::class.java))
         }
-      /*  view.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                diaryAdapter.filterSet(newText)
-                return false
-            }
-
-        })*/
 
         calViewModel.calData.observe(this, androidx.lifecycle.Observer {
             cal = it

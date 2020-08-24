@@ -22,6 +22,7 @@ class DiaryBookMarkActivity : AppCompatActivity() {
     var bookMarkTitleList = mutableListOf<String>()
     lateinit var bookMarkAdapter : BookMarkAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_book_mark)

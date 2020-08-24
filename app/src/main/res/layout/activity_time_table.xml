@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.timetable.TimeTableActivity">
+
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--툴바-->
+            <include layout="@layout/app_toolbar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+
+                <com.jaeyoung.timeschedulecustom.TimeBackMainView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <com.jaeyoung.timeschedulecustom.TimeBackView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <com.jaeyoung.d_time.customView.TimeScheduleView
+                            android:id="@+id/timeSchedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.jaeyoung.timeschedulecustom.TimeBackView>
+                </com.jaeyoung.timeschedulecustom.TimeBackMainView>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/timetable_circle_back"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="25dp"
+                            android:background="@drawable/plus_btn_back"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/diary_date_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font"
+                                android:text="2020.3.2"
+                                android:textColor="#000"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/add_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:background="@drawable/plus_btn_back"
+                                android:padding="8dp"
+                                android:src="@drawable/tick" />
+
+                            <ImageButton
+                                android:id="@+id/del_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/plus_btn_back"
+                                android:padding="6dp"
+                                android:src="@drawable/icons_8_trash_256" />
+
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/event_et"
+                        style="@style/EditTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font"
+                        android:hint="Event Name"
+                        android:theme="@style/EditTextStyle" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/plus_btn_back"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp">
+
+                            <ImageButton
+                                android:id="@+id/clock_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:padding="8dp"
+                                android:src="@drawable/clock" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="#000000" />
+
+                            <ImageButton
+                                android:id="@+id/bell_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:padding="8dp"
+                                android:src="@drawable/bell" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="#000000" />
+
+                            <ImageButton
+                                android:id="@+id/repeat_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:padding="8dp"
+                                android:src="@drawable/repeat" />
+                        </LinearLayout>
+
+
+                        <ImageButton
+                            android:id="@+id/note_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/plus_btn_back"
+                            android:padding="8dp"
+                            android:src="@drawable/chat" />
+
+                        <LinearLayout
+                            android:id="@+id/color_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:background="@drawable/plus_btn_back">
+
+                            <ImageView
+                                android:id="@+id/color_btn_back"
+                                android:layout_width="19dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/circle_red" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/note_view"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:minHeight="150dp"
+                        android:background="@drawable/timetable_note_back"
+                        android:padding="20dp">
+
+                        <EditText
+                            android:id="@+id/note_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:hint="WRITE NOTES"
+                            android:background="@null"
+                            android:fontFamily="@font/font"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/time_add_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:background="@drawable/timetable_note_back"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/font"
+                            android:text="START"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/start_hour_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font"
+                                android:text="00"
+                                android:textColor="#000000"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textSize="16sp"
+                                android:text=":"/>
+
+
+                            <TextView
+                                android:id="@+id/start_min_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font"
+                                android:layout_marginEnd="10dp"
+                                android:textSize="16sp"
+                                android:text="00"/>
+
+                            <Button
+                                android:id="@+id/start_time_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font"
+                                android:text="TIME\nSELECT"
+                                android:background="@drawable/plus_btn_back"/>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/font"
+                            android:text="END"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/end_hour_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font"
+                                android:textSize="16sp"
+                                android:text="01"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textSize="16sp"
+                                android:text=":"/>
+
+
+                            <TextView
+                                android:id="@+id/end_min_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font"
+                                android:layout_marginEnd="10dp"
+                                android:textSize="16sp"
+                                android:text="00"/>
+
+                            <Button
+                                android:id="@+id/end_time_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font"
+                                android:text="TIME\nSELECT"
+                                android:background="@drawable/plus_btn_back"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/color_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/timetable_note_back"
+                        android:padding="10dp">
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn01"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_red"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn02"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_orange"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn03"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_yellow"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn04"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_green"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn05"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_blue"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn06"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_purple"/>
+
+                        <ImageButton
+                            android:id="@+id/color_img_btn07"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/circle_gray"/>
+
+                       <!-- <LinearLayout
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/circleback">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/paint_brush"/>
+                        </LinearLayout>-->
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

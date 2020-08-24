@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val titleList = mutableListOf("D TIME","DIARY","TIMETABLE")
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var calendarDialog: CalendarDialog
-
+    private var backKeyPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +95,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(drawer_layout.isDrawerOpen(drawer)) drawer_layout.closeDrawer(drawer)
-        else finish()
+        else {
+            if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                backKeyPressedTime = System.currentTimeMillis()
+                Toast.makeText(this, "Press the 'Back' button one more time to finish.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                finish()
+            }
+        }
     }
 
     fun getCalendarViewModel() : CalendarViewModel {
@@ -109,6 +118,5 @@ class MainActivity : AppCompatActivity() {
     fun dismissCalendarDialog(){
         calendarDialog.dismiss()
     }
-
 
 }

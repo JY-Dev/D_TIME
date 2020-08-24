@@ -2,11 +2,41 @@
 <resources>
     <item name="camera_btn" type="id" />
     <item name="photo_btn" type="id" />
+    <item name="emotion_btn_01" type="id"/>
+    <item name="emotion_btn_02" type="id"/>
+    <item name="emotion_btn_03" type="id"/>
+    <item name="emotion_btn_04" type="id"/>
+    <item name="emotion_btn_05" type="id"/>
+    <item name="emotion_btn_06" type="id"/>
+    <item name="emotion_btn_07" type="id"/>
+    <item name="weather_btn_01" type="id"/>
+    <item name="weather_btn_02" type="id"/>
+    <item name="weather_btn_03" type="id"/>
+    <item name="weather_btn_04" type="id"/>
+    <item name="weather_btn_05" type="id"/>
+
 
     <array name="edit_id">
         <item>@id/camera_btn</item>
         <item>@id/photo_btn</item>
     </array>
 
+    <array name="emotion_id">
+        <item>@id/emotion_btn_01</item>
+        <item>@id/emotion_btn_02</item>
+        <item>@id/emotion_btn_03</item>
+        <item>@id/emotion_btn_04</item>
+        <item>@id/emotion_btn_05</item>
+        <item>@id/emotion_btn_06</item>
+        <item>@id/emotion_btn_07</item>
+    </array>
+
+    <array name="weahter_id">
+        <item>@id/weather_btn_01</item>
+        <item>@id/weather_btn_02</item>
+        <item>@id/weather_btn_03</item>
+        <item>@id/weather_btn_04</item>
+        <item>@id/weather_btn_05</item>
+    </array>
 
 </resources>

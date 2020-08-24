@@ -5,5 +5,6 @@ package com.jaeyoung.d_time.utils
  */
 enum class DiaryPopup{
     EDIT,
-    MORE
+    WEATHER,
+    EMOTION
 }

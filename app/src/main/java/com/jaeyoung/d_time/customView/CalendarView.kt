@@ -1,5 +1,6 @@
 package jaeyoung.kim.calendarview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
@@ -98,6 +99,7 @@ class CalendarView : LinearLayout {
         return topDateView
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun createGridView(): GridView {
         val lp = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         gridView.setOnItemClickListener { adapterView, view, position, l ->
