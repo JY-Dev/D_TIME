@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.Toast
+import com.jaeyoung.d_time.activity.timetable.TimeTableActivity
 import kotlin.math.*
 
 class TimeScheduleView : ViewGroup {
@@ -17,6 +18,7 @@ class TimeScheduleView : ViewGroup {
     private var screenHeight = 0
     private val CENTER_ANGLE = 270f
     private val data = mutableListOf<Schedule>()
+    private var activity : TimeTableActivity? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -34,6 +36,10 @@ class TimeScheduleView : ViewGroup {
         defStyleAttr
     ) {
         setWillNotDraw(false)
+    }
+
+    fun setActivity(context: TimeTableActivity){
+        activity = context
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -131,7 +137,7 @@ class TimeScheduleView : ViewGroup {
         return (hour * 60 + min) / 1440f * 360f
     }
 
-    fun addItem(startHour: Int,startMin: Int, endHour: Int, endMin: Int, title: String , color:String) {
+    fun addItem(startHour: Int,startMin: Int, endHour: Int, endMin: Int, title: String , color:String , mode : String) : Boolean{
         val startAngle = getTimeAngle(startHour,startMin)
         val endAngle = getTimeAngle(endHour,endMin)
         val wholeAngle =
@@ -142,6 +148,14 @@ class TimeScheduleView : ViewGroup {
                 checkFlag = false
             }*/
             if (it.startAngle == startAngle && endAngle == it.endAngle) checkFlag = false
+            if(startAngle <it.startAngle && endAngle > it.endAngle)
+                checkFlag = false
+           if(startAngle > endAngle){
+                if(it.startAngle < it.endAngle){
+                    if(it.startAngle < endAngle && it.endAngle < endAngle)
+                        checkFlag = false
+                }
+            }
 
                 if (it.startAngle < it.endAngle) {
                     if (((startAngle >= it.startAngle && startAngle < it.endAngle) || (endAngle > it.startAngle && endAngle <= it.endAngle))) {
@@ -154,18 +168,26 @@ class TimeScheduleView : ViewGroup {
                 }
 
         }
-        if (checkFlag && startAngle != endAngle) data.add(
-            Schedule(
-                startAngle,
-                endAngle,
-                wholeAngle,
-                title,
-                color
-            )
-        )
-        else Toast.makeText(context, "안됨", Toast.LENGTH_SHORT).show()
-        invalidate()
+        return if (checkFlag && startAngle != endAngle) {
+            if(mode == "add"){
+                data.add(
+                    Schedule(
+                        startAngle,
+                        endAngle,
+                        wholeAngle,
+                        title,
+                        color
+                    )
+
+                )
+                invalidate()
+            }
+            true
+        } else false
+
+
     }
+
 
     fun addOverlapCheck(preStart: Float, preEnd: Float, start: Float, end: Float): Boolean {
         return (start > preStart && start < preEnd) || (end > preStart && end < preEnd)

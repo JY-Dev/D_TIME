@@ -8,3 +8,9 @@ enum class DiaryPopup{
     WEATHER,
     EMOTION
 }
+
+
+
+interface TMode{
+
+}

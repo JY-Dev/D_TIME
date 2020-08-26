@@ -19,6 +19,7 @@ class TimeTableActivity : AppCompatActivity() {
     lateinit var colorBtnList : MutableList<ImageButton>
     lateinit var mainBtnView : MutableList<View>
     var color = colorList[0]
+    var mode = "dd"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +54,28 @@ class TimeTableActivity : AppCompatActivity() {
         note_btn.setOnClickListener(mainBtnOnClickListener)
         color_btn.setOnClickListener(mainBtnOnClickListener)
         add_btn.setOnClickListener {
-            if(event_et.text.isNotEmpty()){
-                timeSchedule.addItem(getTextViewParseInt(start_hour_tv),getTextViewParseInt(start_min_tv)
-                    ,getTextViewParseInt(end_hour_tv),getTextViewParseInt(end_min_tv),event_et.text.toString(),color)
-            } else {
-                Toast.makeText(this,"Please Input Event Text",Toast.LENGTH_SHORT).show()
-            }
+            mode = "add"
+            clearItem()
+        }
+        ok_btn.setOnClickListener {
 
+                    if(event_et.text.isNotEmpty()){
+                        if(timeSchedule.addItem(getTextViewParseInt(start_hour_tv),getTextViewParseInt(start_min_tv)
+                                ,getTextViewParseInt(end_hour_tv),getTextViewParseInt(end_min_tv),event_et.text.toString(),color,mode)){
+                                when(mode){
+                                    "add" -> {
+
+                                    }
+                                    "modify" -> {
+
+                                    }
+                                }
+                        } else {
+                            Toast.makeText(this, "Overlap Time Schedule", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this,"Please Input Event Text",Toast.LENGTH_SHORT).show()
+                    }
         }
         colorBtnList.forEachIndexed { index, imageButton ->
             imageButton.setOnClickListener {
@@ -99,9 +115,7 @@ class TimeTableActivity : AppCompatActivity() {
     }
 
     private val mainBtnOnClickListener = View.OnClickListener { view ->
-        mainBtnView.forEach {
-            it.visibility = View.GONE
-        }
+       allViewGone()
         when(view){
             clock_btn -> {
                 time_add_view.visibility = View.VISIBLE
@@ -117,6 +131,12 @@ class TimeTableActivity : AppCompatActivity() {
 
     }
 
+    private fun allViewGone(){
+        mainBtnView.forEach {
+            it.visibility = View.GONE
+        }
+    }
+
     private fun scrollDown(){
         scrollview.post {
             scrollview.fullScroll(View.FOCUS_DOWN)
@@ -125,5 +145,13 @@ class TimeTableActivity : AppCompatActivity() {
     private fun hideKeyboard() {
         if (title_et.hasFocus()) keyBoardUtil.hideKeyboard(title_et)
         else keyBoardUtil.hideKeyboard(subtitle_et)
+    }
+
+    private fun clearItem(){
+        title_et.text.clear()
+        note_et.text.clear()
+        color = colorList[0]
+        color_btn_back.setImageResource(colorBtnBackList[0])
+        allViewGone()
     }
 }

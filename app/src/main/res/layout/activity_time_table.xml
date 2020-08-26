@@ -27,24 +27,39 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                <com.jaeyoung.timeschedulecustom.TimeBackMainView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <com.jaeyoung.timeschedulecustom.TimeBackView
+                    <com.jaeyoung.timeschedulecustom.TimeBackMainView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center">
 
-                        <com.jaeyoung.d_time.customView.TimeScheduleView
-                            android:id="@+id/timeSchedule"
+                        <com.jaeyoung.timeschedulecustom.TimeBackView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
 
-                    </com.jaeyoung.timeschedulecustom.TimeBackView>
-                </com.jaeyoung.timeschedulecustom.TimeBackMainView>
+                            <com.jaeyoung.d_time.customView.TimeScheduleView
+                                android:id="@+id/timeSchedule"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.jaeyoung.timeschedulecustom.TimeBackView>
+                    </com.jaeyoung.timeschedulecustom.TimeBackMainView>
+
+                    <Button
+                        android:id="@+id/add_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/circleback"
+                        android:text="add"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+
 
 
 
@@ -87,9 +102,9 @@
                             android:orientation="horizontal">
 
                             <ImageButton
-                                android:id="@+id/add_btn"
+                                android:id="@+id/ok_btn"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="10dp"
