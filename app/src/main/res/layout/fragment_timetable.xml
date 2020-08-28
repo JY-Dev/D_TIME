@@ -24,7 +24,7 @@
             android:src="@drawable/outline_add_black_48" />
 
         <ImageButton
-            android:id="@+id/del_btn"
+            android:id="@+id/cal_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -43,8 +43,8 @@
         android:background="#000000" />
 
     <ListView
-        android:id="@+id/bookmark_list"
-        android:layout_width="wrap_content"
+        android:id="@+id/timeTable_list"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="10dp"
         android:divider="@null"

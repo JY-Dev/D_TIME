@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 mutableListOf(
                     TodoFragment(this, application),
                     DiaryFragment(this, application),
-                    TimeTableFragment(this)
+                    TimeTableFragment(this , application)
                 )
             )
         main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{

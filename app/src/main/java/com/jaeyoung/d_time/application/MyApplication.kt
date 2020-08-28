@@ -4,6 +4,7 @@ import android.app.Application
 import com.jaeyoung.d_time.utils.CameraUtil
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessBookMark
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessDiary
+import com.jaeyoung.d_time.utils.dataprocess.DataProcessTimeTable
 import com.jaeyoung.d_time.utils.dataprocess.DataProcessTodo
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -28,6 +29,11 @@ class MyApplication : Application() {
         }
         single {
             DataProcessDiary(
+                applicationContext
+            )
+        }
+        single {
+            DataProcessTimeTable(
                 applicationContext
             )
         }

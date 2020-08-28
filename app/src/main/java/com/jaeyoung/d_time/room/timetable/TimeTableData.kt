@@ -3,6 +3,7 @@ package com.jaeyoung.d_time.room.timetable
 import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.jaeyoung.d_time.customView.TimeScheduleView
 
 @Entity
 data class TimeTableData(
@@ -11,8 +12,5 @@ data class TimeTableData(
     val event: String,
     val note: String,
     val color: String,
-    val startHour: Int,
-    val startMin : Int,
-    val endHour : Int,
-    val endMin : Int
+    val timeData : String
 )

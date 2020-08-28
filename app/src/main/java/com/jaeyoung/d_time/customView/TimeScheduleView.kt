@@ -10,7 +10,12 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.activity.timetable.TimeTableActivity
+import com.jaeyoung.d_time.callback.TimeScheduleSelCallback
+import com.jaeyoung.d_time.room.timetable.TimeTableData
+import com.jaeyoung.d_time.utils.getTimeData
 import kotlin.math.*
 
 class TimeScheduleView : ViewGroup {
@@ -18,7 +23,8 @@ class TimeScheduleView : ViewGroup {
     private var screenHeight = 0
     private val CENTER_ANGLE = 270f
     private val data = mutableListOf<Schedule>()
-    private var activity : TimeTableActivity? = null
+    private var activity: TimeTableActivity? = null
+    private lateinit var timeScheduleSelCallback: TimeScheduleSelCallback
 
     constructor(context: Context) : super(context) {
         init()
@@ -38,8 +44,12 @@ class TimeScheduleView : ViewGroup {
         setWillNotDraw(false)
     }
 
-    fun setActivity(context: TimeTableActivity){
+    fun setActivity(context: TimeTableActivity) {
         activity = context
+    }
+
+    fun setCallback(timeScheduleSelCallback: TimeScheduleSelCallback) {
+        this.timeScheduleSelCallback = timeScheduleSelCallback
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -59,7 +69,7 @@ class TimeScheduleView : ViewGroup {
                                     schedule.endAngle
                                 )
                             ) {
-                                Toast.makeText(context, schedule.title, Toast.LENGTH_SHORT).show()
+                                timeScheduleSelCallback.select(schedule.id)
                             }
                         }
                     }
@@ -137,57 +147,70 @@ class TimeScheduleView : ViewGroup {
         return (hour * 60 + min) / 1440f * 360f
     }
 
-    fun addItem(startHour: Int,startMin: Int, endHour: Int, endMin: Int, title: String , color:String , mode : String) : Boolean{
-        val startAngle = getTimeAngle(startHour,startMin)
-        val endAngle = getTimeAngle(endHour,endMin)
-        val wholeAngle =
-            if (startAngle > endAngle) 360 - startAngle + endAngle else endAngle - startAngle
+    fun checkItem(timeData: TimeData, targetId: Long): Boolean {
+        val startAngle = getTimeAngle(timeData.startHour, timeData.startMin)
+        val endAngle = getTimeAngle(timeData.endHour, timeData.endMin)
         var checkFlag = true
         data.forEach {
             /*if (((startAngle > it.startAngle && startAngle < it.endAngle) || (endAngle > it.startAngle && endAngle < it.endAngle))||startAngle==it.startAngle) {
                 checkFlag = false
             }*/
-            if (it.startAngle == startAngle && endAngle == it.endAngle) checkFlag = false
-            if(startAngle <it.startAngle && endAngle > it.endAngle)
+            if (it.startAngle == startAngle && endAngle == it.endAngle) {
                 checkFlag = false
-           if(startAngle > endAngle){
-                if(it.startAngle < it.endAngle){
-                    if(it.startAngle < endAngle && it.endAngle < endAngle)
+            }
+            if (startAngle < it.startAngle && endAngle > it.endAngle)
+                checkFlag = false
+            if (startAngle > endAngle) {
+                if (it.startAngle < it.endAngle) {
+                    if (it.startAngle < endAngle && it.endAngle < endAngle)
                         checkFlag = false
                 }
             }
 
-                if (it.startAngle < it.endAngle) {
-                    if (((startAngle >= it.startAngle && startAngle < it.endAngle) || (endAngle > it.startAngle && endAngle <= it.endAngle))) {
-                        checkFlag = false
-                    }
-                } else {
-                    if ((((startAngle >= it.startAngle && startAngle <= 360)||(startAngle>0 && startAngle < it.endAngle)) || ((endAngle >= 0 && endAngle <= it.endAngle)||(endAngle > it.startAngle && endAngle < 360)))) {
-                        checkFlag = false
-                    }
+            if (it.startAngle < it.endAngle) {
+                if (((startAngle >= it.startAngle && startAngle < it.endAngle) || (endAngle > it.startAngle && endAngle <= it.endAngle))) {
+                    checkFlag = false
                 }
+            } else {
+                if ((((startAngle >= it.startAngle && startAngle <= 360) || (startAngle > 0 && startAngle < it.endAngle)) || ((endAngle >= 0 && endAngle <= it.endAngle) || (endAngle > it.startAngle && endAngle < 360)))) {
+                    checkFlag = false
+                }
+            }
+
+            if (targetId == it.id && (it.startAngle == startAngle && endAngle == it.endAngle)) checkFlag = true
+
 
         }
-        return if (checkFlag && startAngle != endAngle) {
-            if(mode == "add"){
-                data.add(
-                    Schedule(
-                        startAngle,
-                        endAngle,
-                        wholeAngle,
-                        title,
-                        color
-                    )
-
-                )
-                invalidate()
-            }
-            true
-        } else false
+        return checkFlag && startAngle != endAngle
 
 
     }
 
+    fun setItem(timetableList: MutableList<TimeTableData>) {
+        timetableList.forEach {
+            val timeData = getTimeData(it.timeData)
+            val startAngle = getTimeAngle(timeData.startHour, timeData.startMin)
+            val endAngle = getTimeAngle(timeData.endHour, timeData.endMin)
+            val wholeAngle =
+                if (startAngle > endAngle) 360 - startAngle + endAngle else endAngle - startAngle
+            data.add(
+                Schedule(
+                    startAngle,
+                    endAngle,
+                    wholeAngle,
+                    it.event,
+                    it.color,
+                    it.id
+                )
+            )
+        }
+        invalidate()
+    }
+
+    fun clearView() {
+        data.clear()
+        removeAllViews()
+    }
 
     fun addOverlapCheck(preStart: Float, preEnd: Float, start: Float, end: Float): Boolean {
         return (start > preStart && start < preEnd) || (end > preStart && end < preEnd)
@@ -231,7 +254,15 @@ class TimeScheduleView : ViewGroup {
         val startAngle: Float,
         val endAngle: Float,
         val wholeAngle: Float,
-        val title: String,
-        val color : String
+        val event: String,
+        val color: String,
+        val id: Long
+    )
+
+    data class TimeData(
+        val startHour: Int,
+        val startMin: Int,
+        val endHour: Int,
+        val endMin: Int
     )
 }

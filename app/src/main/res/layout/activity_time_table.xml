@@ -31,6 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
+
+
                     <com.jaeyoung.timeschedulecustom.TimeBackMainView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -86,7 +88,7 @@
                             android:padding="10dp">
 
                             <TextView
-                                android:id="@+id/diary_date_tv"
+                                android:id="@+id/date_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/font"
