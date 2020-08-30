@@ -133,6 +133,7 @@
                     android:background="@drawable/plus_btn_back">
 
                     <TextView
+                        android:id="@+id/now_time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -148,6 +149,7 @@
                         android:background="#000"/>
 
                     <TextView
+                        android:id="@+id/now_event_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -189,6 +191,7 @@
                     android:background="@drawable/plus_btn_back">
 
                     <TextView
+                        android:id="@+id/next_time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -204,6 +207,7 @@
                         android:background="#000"/>
 
                     <TextView
+                        android:id="@+id/next_event_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
