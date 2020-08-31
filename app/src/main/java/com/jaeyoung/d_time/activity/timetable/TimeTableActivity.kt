@@ -7,8 +7,6 @@ import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.R
 import com.jaeyoung.d_time.callback.TimeScheduleSelCallback
 import com.jaeyoung.d_time.customView.TimeScheduleView
@@ -66,9 +64,11 @@ class TimeTableActivity : AppCompatActivity() {
         )
         mainFuncView = mutableListOf(time_add_view, note_view, color_view)
         date = intent.extras!!.getString("date","0")
+        id = intent.extras!!.getLong("id",0L)
         toolBarInit()
         layoutInit()
         viewModelInit()
+        if(id!=0L) timetableViewModel.getIdData(id)
     }
 
     private fun toolBarInit() {
@@ -91,14 +91,16 @@ class TimeTableActivity : AppCompatActivity() {
         timetableViewModel.timeTableList.observe(this, Observer {
             timeSchedule.clearView()
             timeSchedule.setItem(it)
-            clearItem(0L)
+            if(id==0L) clearItem(0L)
+            else timeSchedule.curItem(id)
         })
         timetableViewModel.timeTable.observe(this, Observer {
             setItem(it)
+
         })
         timetableViewModel.status.observe(this, Observer {
             timetableViewModel.getAllData(date)
-            Toast.makeText(this,"Data is Update",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Update Complete",Toast.LENGTH_SHORT).show()
         })
         timetableViewModel.getAllData(date)
     }
@@ -112,6 +114,7 @@ class TimeTableActivity : AppCompatActivity() {
             override fun select(selId: Long) {
                 id = selId
                 timetableViewModel.getIdData(selId)
+                timeSchedule.curItem(id)
             }
         })
         start_time_btn.setOnClickListener(timeBtnOnClickListener)
@@ -121,6 +124,7 @@ class TimeTableActivity : AppCompatActivity() {
         color_btn.setOnClickListener(mainBtnOnClickListener)
         add_btn.setOnClickListener {
             clearItem(0L)
+            timeSchedule.clearSel()
         }
         date_tv.text = date
         del_btn.setOnClickListener {
@@ -134,7 +138,7 @@ class TimeTableActivity : AppCompatActivity() {
                     getTextViewParseInt(start_hour_tv), getTextViewParseInt(start_min_tv)
                     , getTextViewParseInt(end_hour_tv), getTextViewParseInt(end_min_tv)
                 )
-                if (timeSchedule.checkItem(timeData,id)) {
+                if (timeSchedule.curItem(timeData,id)) {
                     if(id==0L) id = System.currentTimeMillis()
                     val timeTableData = TimeTableData(id, date, event_et.text.toString(), note_et.text.toString(), color, gson.toJson(timeData,gsonType.type))
                     when (mode) {
@@ -145,6 +149,7 @@ class TimeTableActivity : AppCompatActivity() {
                             timetableViewModel.updateData(timeTableData)
                         }
                     }
+                    timeSchedule.clearSel()
                 } else {
                     Toast.makeText(this, "Overlap Time Schedule", Toast.LENGTH_SHORT).show()
                 }
@@ -240,6 +245,7 @@ class TimeTableActivity : AppCompatActivity() {
         end_min_tv.text = getTimeString(timeData.endMin)
         color = timeTableData.color
         color_btn_back.setImageResource(colorBtnBackList[colorList.indexOf(color)])
+        time_add_view.visibility = View.VISIBLE
     }
 
     private fun clearItem(targetId:Long) {
@@ -254,5 +260,7 @@ class TimeTableActivity : AppCompatActivity() {
         color = colorList[0]
         color_btn_back.setImageResource(colorBtnBackList[0])
         allViewGone()
+        time_add_view.visibility = View.VISIBLE
+        scrollDown()
     }
 }

@@ -14,14 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.timetable.TimeTableActivity">
+        <activity android:name=".activity.timetable.TimeTableActivity" android:windowSoftInputMode="stateHidden">
 
         </activity>
-        <activity android:name=".activity.diary.DiarySearchActivity" />
-        <activity android:name=".activity.diary.DiaryBookMarkDetailActivity" />
-        <activity android:name=".activity.diary.DiaryBookMarkSelActivity" />
-        <activity android:name=".activity.diary.DiaryBookMarkActivity" />
-        <activity android:name=".activity.splash.SplashActivity">
+        <activity android:name=".activity.diary.DiarySearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.diary.DiaryBookMarkDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.diary.DiaryBookMarkSelActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.diary.DiaryBookMarkActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,8 +44,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.diary.DiaryWriteActivity" />
-        <activity android:name=".activity.diary.DiaryViewActivity" />
+        <activity android:name=".activity.diary.DiaryWriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.diary.DiaryViewActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait" />

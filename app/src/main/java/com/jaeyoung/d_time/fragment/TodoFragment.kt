@@ -43,7 +43,7 @@ class TodoFragment(
     lateinit var todoItemAdpater: TodoAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var itemDecoration: TodoItemDecoration
-    var imm : InputMethodManager? = null
+    var imm: InputMethodManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +60,8 @@ class TodoFragment(
             ViewModelProvider.AndroidViewModelFactory.getInstance(mApplication)
         todoViewModel =
             ViewModelProvider(this, androidViewModelFactory).get(TodoViewModel::class.java)
-        timeTableViewModel = ViewModelProvider(this, androidViewModelFactory).get(TimeTableViewModel::class.java)
+        timeTableViewModel =
+            ViewModelProvider(this, androidViewModelFactory).get(TimeTableViewModel::class.java)
         todoViewModel.todoDataList.observe(this, Observer {
             todoItemAdpater.setData(it)
             view.todo_listview.smoothScrollToPosition(todoItemAdpater.itemCount)
@@ -70,33 +71,37 @@ class TodoFragment(
         timeTableViewModel.timeTableList.observe(this, Observer {
             val data = it
             val dateCal = Calendar.getInstance()
-            val time = dateCal.get(Calendar.HOUR_OF_DAY)*60+dateCal.get(Calendar.MINUTE)
-            data.sortBy { getTimeData(it.timeData).startHour*60+ getTimeData(it.timeData).startMin}
+            val time = dateCal.get(Calendar.HOUR_OF_DAY) * 60 + dateCal.get(Calendar.MINUTE)
+            data.sortBy { getTimeData(it.timeData).startHour * 60 + getTimeData(it.timeData).startMin }
 
-            val list = data.filter { getTimeData(it.timeData).startHour*60+getTimeData(it.timeData).startMin <= time && getTimeData(it.timeData).endHour*60+getTimeData(it.timeData).endMin >= time }.toMutableList()
+            val list = data.filter {
+                getTimeData(it.timeData).startHour * 60 + getTimeData(it.timeData).startMin <= time && getTimeData(
+                    it.timeData
+                ).endHour * 60 + getTimeData(it.timeData).endMin >= time
+            }.toMutableList()
 
-            if(list.size==1){
+            if (list.size == 1) {
                 data.forEachIndexed { index, test ->
-                    if(list[0].id==test.id) {
-                        if(index<=list.size-2)
-                        list.add(data[index+1])
+                    if (list[0].id == test.id) {
+                        if (index <= data.size - 2)
+                            list.add(data[index + 1])
                     }
                 }
-                if(list.size==1) list.add(1, TimeTableData(0L,"","","","",""))
+                if (list.size == 1) list.add(1, TimeTableData(0L, "", "", "", "", ""))
             } else {
-                val test = data.filter { getTimeData(it.timeData).startHour+getTimeData(it.timeData).startMin > time }
-                if(test.isNotEmpty()){
-                    list.add(0, TimeTableData(0L,"","","","",""))
-                    list.add(1,test[0])
+                val test = data.filter { getTimeData(it.timeData).startHour*60 + getTimeData(it.timeData).startMin > time }
+                if (test.isNotEmpty()) {
+                    list.add(0, TimeTableData(0L, "", "", "", "", ""))
+                    list.add(1, test[0])
                 } else {
-                    list.add(0, TimeTableData(0L,"","","","",""))
-                    list.add(1, TimeTableData(0L,"","","","",""))
+                    list.add(0, TimeTableData(0L, "", "", "", "", ""))
+                    list.add(1, TimeTableData(0L, "", "", "", "", ""))
                 }
 
             }
-            list.forEachIndexed {index, listData ->
-                if(listData.id==0L){
-                    if(index==0){
+            list.forEachIndexed { index, listData ->
+                if (listData.id == 0L) {
+                    if (index == 0) {
                         view.now_time_tv.text = "No Event"
                         view.now_event_tv.text = "No Event"
                     } else {
@@ -106,8 +111,11 @@ class TodoFragment(
 
                 } else {
                     val timeData = getTimeData(list[index].timeData)
-                    val timeTv = getTime(timeData.startHour,timeData.startMin) + " - " + getTime(timeData.endHour,timeData.endMin)
-                    if(index==0){
+                    val timeTv = getTime(
+                        timeData.startHour,
+                        timeData.startMin
+                    ) + " - " + getTime(timeData.endHour, timeData.endMin)
+                    if (index == 0) {
                         view.now_time_tv.text = timeTv
                         view.now_event_tv.text = list[index].event
                     } else {
@@ -169,7 +177,7 @@ class TodoFragment(
                 view.todo_et.text.clear()
             }
             todoViewModel.getTodoData(getDate(cal))
-            imm?.hideSoftInputFromWindow(view.todo_et.windowToken,0)
+            imm?.hideSoftInputFromWindow(view.todo_et.windowToken, 0)
         }
 
         view.date_btn.setOnClickListener {

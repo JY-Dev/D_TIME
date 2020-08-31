@@ -24,7 +24,7 @@ class TimeTableAdapter(context: Context) : BaseAdapter() {
         return view
     }
 
-    override fun getItem(p0: Int): Any {
+    override fun getItem(p0: Int): TimeTableData {
         return timeTableData[p0]
     }
 

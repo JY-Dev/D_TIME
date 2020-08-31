@@ -25,6 +25,7 @@ class TimeScheduleView : ViewGroup {
     private val data = mutableListOf<Schedule>()
     private var activity: TimeTableActivity? = null
     private lateinit var timeScheduleSelCallback: TimeScheduleSelCallback
+    private var curSchedule: Schedule? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -147,7 +148,7 @@ class TimeScheduleView : ViewGroup {
         return (hour * 60 + min) / 1440f * 360f
     }
 
-    fun checkItem(timeData: TimeData, targetId: Long): Boolean {
+    fun curItem(timeData: TimeData, targetId: Long): Boolean {
         val startAngle = getTimeAngle(timeData.startHour, timeData.startMin)
         val endAngle = getTimeAngle(timeData.endHour, timeData.endMin)
         var checkFlag = true
@@ -177,8 +178,11 @@ class TimeScheduleView : ViewGroup {
                 }
             }
 
-            if (targetId == it.id && (it.startAngle == startAngle && endAngle == it.endAngle)) checkFlag = true
+            if (targetId == it.id && (it.startAngle == startAngle && endAngle == it.endAngle)) checkFlag =
+                true
 
+            // 2020-08-31 추가
+            if (startAngle > endAngle) checkFlag = false
 
         }
         return checkFlag && startAngle != endAngle
@@ -212,8 +216,16 @@ class TimeScheduleView : ViewGroup {
         removeAllViews()
     }
 
-    fun addOverlapCheck(preStart: Float, preEnd: Float, start: Float, end: Float): Boolean {
-        return (start > preStart && start < preEnd) || (end > preStart && end < preEnd)
+    fun curItem(id : Long){
+        data.forEach {
+            if(it.id==id) curSchedule = it
+        }
+        invalidate()
+    }
+
+    fun clearSel(){
+        curSchedule = null
+        invalidate()
     }
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
@@ -231,7 +243,8 @@ class TimeScheduleView : ViewGroup {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        val pnt = Paint();
+        val pnt = Paint()
+        val linePnt = Paint()
 
         pnt.apply {
             strokeWidth = 6f
@@ -239,17 +252,26 @@ class TimeScheduleView : ViewGroup {
             style = Paint.Style.FILL
         }
 
+        linePnt.apply {
+            strokeWidth = 3f
+            color = Color.parseColor("#000000")
+            style = Paint.Style.STROKE
+        }
         val rect = RectF()
         rect.set(0f, 0f, screenWidth.toFloat(), screenHeight.toFloat())
         data.forEach {
             pnt.color = Color.parseColor(it.color)
             canvas?.drawArc(rect, CENTER_ANGLE + it.startAngle, it.wholeAngle, true, pnt)
+            canvas?.drawArc(rect, CENTER_ANGLE + it.startAngle, it.wholeAngle, true, linePnt)
         }
-
-        //pnt.setColor(Color.parseColor("#00FF00"));
-        // canvas?.drawArc(rect, CENTER_ANGLE + 180f, 180f, true, pnt)
+        if(curSchedule!=null){
+            pnt.color = Color.parseColor("#4d000000")
+            canvas?.drawArc(rect, CENTER_ANGLE + curSchedule!!.startAngle, curSchedule!!.wholeAngle, true, pnt)
+        }
     }
 
+    //pnt.setColor(Color.parseColor("#00FF00"));
+    // canvas?.drawArc(rect, CENTER_ANGLE + 180f, 180f, true, pnt)
     data class Schedule(
         val startAngle: Float,
         val endAngle: Float,
@@ -266,3 +288,5 @@ class TimeScheduleView : ViewGroup {
         val endMin: Int
     )
 }
+
+

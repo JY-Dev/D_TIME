@@ -36,7 +36,15 @@ class TimeTableFragment(context: Context,application:Application) : Fragment() {
     ): View{
         val view = inflater.inflate(R.layout.fragment_timetable,container,false)
         timeTableAdapter = TimeTableAdapter(mContext)
-        view.timeTable_list.adapter = timeTableAdapter
+        view.timeTable_list.apply {
+            adapter = timeTableAdapter
+            setOnItemClickListener { _, _, position, _ ->
+                val intent = Intent(mContext,TimeTableActivity::class.java)
+                intent.putExtra("date",getDate(cal))
+                intent.putExtra("id",timeTableAdapter.getItem(position).id)
+                startActivity(intent)
+            }
+        }
         viewModelInit()
         view.cal_btn.setOnClickListener {
             mainActivity.showCalendarDialog()

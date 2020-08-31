@@ -55,8 +55,8 @@
                         android:id="@+id/add_btn"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/circleback"
-                        android:text="add"
+                        android:background="@drawable/timetable_circle_btn"
+                        android:text="NEW"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
