@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.BaseActivity
 import com.jaeyoung.d_time.viewModel.diary.DiaryViewModel
 import kotlinx.android.synthetic.main.activity_diary_view.*
 import kotlinx.android.synthetic.main.activity_diary_write.diary_date_tv
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_diary_write.image_layout
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.diary_image_layout.view.*
 
-class DiaryViewActivity : AppCompatActivity() {
+class DiaryViewActivity : BaseActivity() {
     lateinit var diaryViewModel: DiaryViewModel
     val listType: TypeToken<MutableList<String>> = object : TypeToken<MutableList<String>>() {}
     val gson = GsonBuilder().create()
@@ -34,25 +35,9 @@ class DiaryViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_diary_view)
         emotionImgArray = resources.obtainTypedArray(R.array.emotion_image)
         weatherImgArray = resources.obtainTypedArray(R.array.weather_image)
-        toolBarInit()
+        toolBarInit("MY DIARY")
         viewModelInit()
         layoutInit()
-    }
-
-    /**
-     * Toolbar Init
-     */
-    private fun toolBarInit(){
-        setSupportActionBar(app_toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "MY DIARY"
-        back_btn.visibility = View.VISIBLE
-        back_btn.apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                finish()
-            }
-        }
     }
 
     private fun viewModelInit() {

@@ -35,60 +35,17 @@ class DiaryFragment(context: Context, application: Application) : Fragment() {
     lateinit var diaryViewModel: DiaryViewModel
     lateinit var diaryAdapter: DiaryAdapter
     lateinit var autoCompleteAdapter: AutoCompleteAdapter
+    private lateinit var mView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_diary, container, false)
+        mView = inflater.inflate(R.layout.fragment_diary, container, false)
         viewModelInit()
-        diaryAdapter = DiaryAdapter(mContext)
-        autoCompleteAdapter = AutoCompleteAdapter(mContext, mutableListOf())
-        view.search_et.setAdapter(autoCompleteAdapter)
-        view.diary_list.apply {
-            adapter = diaryAdapter
-            setOnItemClickListener { _, _, position, _ ->
-                view.search_et.text.clear()
-                view.search_et.visibility = View.GONE
-                val intent = Intent(Intent(mContext, DiaryViewActivity::class.java))
-                val item = diaryAdapter.getItem(position) as DiaryData
-                intent.putExtra("primary", item.id)
-                startActivity(intent)
-            }
-        }
-
-        val searchViewText : SearchView.SearchAutoComplete  = view.search.findViewById(androidx.appcompat.R.id.search_src_text)
-        val myTypeface = ResourcesCompat.getFont(mContext,R.font.font)
-        searchViewText.typeface = myTypeface
-
-        view.search_btn.setOnClickListener {
-            startActivity(Intent(mContext,DiarySearchActivity::class.java))
-        }
-        diaryViewModel.diaryAllList.observe(this, androidx.lifecycle.Observer {
-            autoCompleteAdapter.setData(it)
-            view.search_et.visibility = View.VISIBLE
-        })
-
-        view.bookmark_btn.setOnClickListener {
-            startActivity(Intent(mContext,DiaryBookMarkActivity::class.java))
-        }
-
-        calViewModel.calData.observe(this, androidx.lifecycle.Observer {
-            cal = it
-            mainActivity.dismissCalendarDialog()
-            diaryViewModel.getDiaryData(getDateFull(cal))
-        })
-        view.cal_btn.setOnClickListener {
-            mainActivity.showCalendarDialog()
-        }
-        view.write_btn.setOnClickListener {
-            val intent = Intent(Intent(mContext, DiaryWriteActivity::class.java))
-            intent.putExtra("date", getDateFull(cal))
-            intent.putExtra("way", false)
-            startActivity(intent)
-        }
-        return view
+        layoutInit()
+        return mView
     }
 
     private fun getDateFull(cal: Calendar): String {
@@ -96,14 +53,66 @@ class DiaryFragment(context: Context, application: Application) : Fragment() {
         return simpleFormat.format(cal.time)
     }
 
+    private fun layoutInit(){
+        // 아답터 셋팅
+        adapterInit()
+
+        //다이어리 리스트
+        mView.diary_list.apply {
+            adapter = diaryAdapter
+            setOnItemClickListener { _, _, position, _ ->
+                val intent = Intent(Intent(mContext, DiaryViewActivity::class.java))
+                val item = diaryAdapter.getItem(position) as DiaryData
+                intent.putExtra("primary", item.id)
+                startActivity(intent)
+            }
+        }
+
+        //버튼 셋팅
+        buttonInit()
+    }
+
+    private fun adapterInit(){
+        diaryAdapter = DiaryAdapter(mContext)
+        autoCompleteAdapter = AutoCompleteAdapter(mContext, mutableListOf())
+    }
+
+    private fun buttonInit(){
+        mView.search_btn.setOnClickListener {
+            startActivity(Intent(mContext,DiarySearchActivity::class.java))
+        }
+
+        mView.bookmark_btn.setOnClickListener {
+            startActivity(Intent(mContext,DiaryBookMarkActivity::class.java))
+        }
+
+        mView.cal_btn.setOnClickListener {
+            mainActivity.showCalendarDialog()
+        }
+        mView.write_btn.setOnClickListener {
+            val intent = Intent(Intent(mContext, DiaryWriteActivity::class.java))
+            intent.putExtra("date", getDateFull(cal))
+            intent.putExtra("way", false)
+            startActivity(intent)
+        }
+    }
+
+
     private fun viewModelInit() {
         val androidViewModelFactory =
             ViewModelProvider.AndroidViewModelFactory.getInstance(mApplication)
-        diaryViewModel =
-            ViewModelProvider(this, androidViewModelFactory).get(DiaryViewModel::class.java)
+        diaryViewModel = ViewModelProvider(this, androidViewModelFactory).get(DiaryViewModel::class.java)
+
+        // 다이어리 리스트
         diaryViewModel.diaryList.observe(this, androidx.lifecycle.Observer {
             diaryAdapter.setDiaryData(it)
+        })
 
+        // 캘린더 정보
+        calViewModel.calData.observe(this, androidx.lifecycle.Observer {
+            cal = it
+            mainActivity.dismissCalendarDialog()
+            diaryViewModel.getDiaryData(getDateFull(cal))
         })
 
     }

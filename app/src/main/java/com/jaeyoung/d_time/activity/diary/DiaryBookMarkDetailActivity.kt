@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.BaseActivity
 import com.jaeyoung.d_time.adapter.diary.BookMarkDetailAdapter
 import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.room.diary.bookmark.BookMarkData
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.app_toolbar.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DiaryBookMarkDetailActivity : AppCompatActivity() {
+class DiaryBookMarkDetailActivity : BaseActivity() {
     lateinit var bookMarkViewModel: BookMarkViewModel
     var bookMarkList = mutableListOf<BookMarkData>()
     lateinit var bookMarkDetailAdapter : BookMarkDetailAdapter
@@ -34,24 +35,12 @@ class DiaryBookMarkDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_book_mark_detail)
-        toolBarInit()
+        toolBarInit(intent.extras!!.getString("bookmark",""))
         viewModelInit()
         layoutInit()
     }
 
-    private fun toolBarInit(){
-        setSupportActionBar(app_toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        bookMark = intent.extras!!.getString("bookmark","")
-        toolbar_title.text = bookMark
-        back_btn.visibility = View.VISIBLE
-        back_btn.apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                finish()
-            }
-        }
-    }
+
     private fun viewModelInit(){
         val androidViewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         bookMarkDetailAdapter = BookMarkDetailAdapter(this)

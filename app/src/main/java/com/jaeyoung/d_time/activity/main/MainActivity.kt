@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.BaseActivity
 import com.jaeyoung.d_time.adapter.main.MainPagerAdpater
 import com.jaeyoung.d_time.dialog.CalendarDialog
 import com.jaeyoung.d_time.fragment.DiaryFragment
@@ -18,8 +19,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.drawer_layout.*
 
-class MainActivity : AppCompatActivity() {
-    private val titleList = mutableListOf("D TIME","DIARY","TIMETABLE")
+class MainActivity : BaseActivity() {
+    private val titleList = mutableListOf("TIMETABLE", "D TIME", "DIARY")
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var calendarDialog: CalendarDialog
     private var backKeyPressedTime = 0L
@@ -34,53 +35,50 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * ToolBar Init
-     */
-    private fun toolBarInit(){
-        setSupportActionBar(app_toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        drawer_btn.visibility = View.VISIBLE
-    }
-
-    /**
      * TodoViewModel Init
      */
-    private fun viewModelInit(){
-        val androidViewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        calendarViewModel = ViewModelProvider(this,androidViewModelFactory).get(CalendarViewModel::class.java)
-        calendarDialog = CalendarDialog(this,calendarViewModel)
+    private fun viewModelInit() {
+        val androidViewModelFactory =
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        calendarViewModel =
+            ViewModelProvider(this, androidViewModelFactory).get(CalendarViewModel::class.java)
+        calendarDialog = CalendarDialog(this, calendarViewModel)
     }
 
     /**
      * UI Init
      */
-    private fun viewInit(){
-        main_viewpager.adapter =
-            MainPagerAdpater(
+    private fun viewInit() {
+        main_viewpager.apply {
+
+            //타임테이블 <-> 메인 <-> 다이어리(뷰페이저)
+            adapter =  MainPagerAdpater(
                 supportFragmentManager,
                 mutableListOf(
-                    TodoFragment(this, application),
-                    DiaryFragment(this, application),
-                    TimeTableFragment(this , application)
+                    TimeTableFragment(this@MainActivity, application),
+                    TodoFragment(this@MainActivity, application),
+                    DiaryFragment(this@MainActivity, application)
+
                 )
             )
-        main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {
-            }
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+                }
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
 
-            override fun onPageSelected(position: Int) {
-                toolbar_title.text = titleList[position]
-            }
-
-
-        })
+                override fun onPageSelected(position: Int) {
+                    //툴바 타이틀 지정
+                    toolbar_title.text = titleList[position]
+                }
+            })
+            currentItem = titleList.indexOf("D TIME")
+        }
         drawer_btn.let {
             it.visibility = View.VISIBLE
             it.setOnClickListener {
@@ -94,11 +92,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(drawer_layout.isDrawerOpen(drawer)) drawer_layout.closeDrawer(drawer)
+        if (drawer_layout.isDrawerOpen(drawer)) drawer_layout.closeDrawer(drawer)
         else {
             if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
                 backKeyPressedTime = System.currentTimeMillis()
-                Toast.makeText(this, "Press the 'Back' button one more time to finish.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Press the 'Back' button one more time to finish.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             }
             if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
@@ -107,15 +109,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getCalendarViewModel() : CalendarViewModel {
+    fun getCalendarViewModel(): CalendarViewModel {
         return calendarViewModel
     }
 
-    fun showCalendarDialog(){
+    fun showCalendarDialog() {
         calendarDialog.show()
     }
 
-    fun dismissCalendarDialog(){
+    fun dismissCalendarDialog() {
         calendarDialog.dismiss()
     }
 

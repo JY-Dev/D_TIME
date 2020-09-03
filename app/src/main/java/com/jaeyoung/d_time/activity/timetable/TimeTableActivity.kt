@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.app_toolbar.*
 class TimeTableActivity : AppCompatActivity() {
     private val keyBoardUtil = KeyBoardUtil(this)
     private lateinit var timetableViewModel: TimeTableViewModel
-
+    private var insertFlag = true
     private var colorBtnBackList = mutableListOf(
         R.drawable.circle_red,
         R.drawable.circle_orange,
@@ -91,6 +91,7 @@ class TimeTableActivity : AppCompatActivity() {
         timetableViewModel.timeTableList.observe(this, Observer {
             timeSchedule.clearView()
             timeSchedule.setItem(it)
+            insertFlag = true
             if(id==0L) clearItem(0L)
             else timeSchedule.curItem(id)
         })
@@ -128,9 +129,9 @@ class TimeTableActivity : AppCompatActivity() {
         }
         date_tv.text = date
         del_btn.setOnClickListener {
-
             if(id!=0L) timetableViewModel.deleteData(id)
-            else clearItem(0L)
+            clearItem(0L)
+
         }
         ok_btn.setOnClickListener {
             if (event_et.text.isNotEmpty()) {
@@ -143,7 +144,11 @@ class TimeTableActivity : AppCompatActivity() {
                     val timeTableData = TimeTableData(id, date, event_et.text.toString(), note_et.text.toString(), color, gson.toJson(timeData,gsonType.type))
                     when (mode) {
                         modeArray[0] -> {
-                            timetableViewModel.insertData(timeTableData)
+                            if(insertFlag){
+                                timetableViewModel.insertData(timeTableData)
+                                insertFlag = false
+                                id = 0L
+                            }
                         }
                         modeArray[1] -> {
                             timetableViewModel.updateData(timeTableData)
@@ -260,6 +265,7 @@ class TimeTableActivity : AppCompatActivity() {
         color = colorList[0]
         color_btn_back.setImageResource(colorBtnBackList[0])
         allViewGone()
+        if(id==0L) timeSchedule.clearSel()
         time_add_view.visibility = View.VISIBLE
         scrollDown()
     }

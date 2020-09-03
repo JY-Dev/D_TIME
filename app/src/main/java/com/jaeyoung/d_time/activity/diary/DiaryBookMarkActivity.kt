@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.BaseActivity
 import com.jaeyoung.d_time.adapter.diary.BookMarkAdapter
 import com.jaeyoung.d_time.room.diary.bookmark.BookMark
 import com.jaeyoung.d_time.room.diary.bookmark.BookMarkData
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_diary_book_mark.*
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.fragment_todo.add_btn
 
-class DiaryBookMarkActivity : AppCompatActivity() {
+class DiaryBookMarkActivity : BaseActivity() {
     lateinit var bookMarkViewModel: BookMarkViewModel
     var bookMarkList = mutableListOf<BookMark>()
     var bookMarkTitleList = mutableListOf<String>()
@@ -26,25 +27,9 @@ class DiaryBookMarkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_book_mark)
-        toolBarInit()
+        toolBarInit("BOOKMARK")
         viewModelInit()
         layoutInit()
-    }
-
-    /**
-     * Toolbar Init
-     */
-    private fun toolBarInit(){
-        setSupportActionBar(app_toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "BOOKMARK"
-        back_btn.visibility = View.VISIBLE
-        back_btn.apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                finish()
-            }
-        }
     }
 
     private fun layoutInit(){

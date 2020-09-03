@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.jaeyoung.d_time.R
+import com.jaeyoung.d_time.activity.BaseActivity
 import com.jaeyoung.d_time.room.diary.DiaryData
 import com.jaeyoung.d_time.utils.CameraUtil
 import com.jaeyoung.d_time.utils.DiaryPopup
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_diary_write.*
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.diary_image_layout.view.*
 
-class DiaryWriteActivity : AppCompatActivity() {
+class DiaryWriteActivity : BaseActivity() {
     var mPopupList = mutableListOf<PopupWindow>()
     var mPopupViewList = mutableListOf<View>()
     lateinit var cameraUtil: CameraUtil
@@ -49,28 +50,12 @@ class DiaryWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_write)
         popupWindowInit()
-        toolBarInit()
+        toolBarInit("WRITING")
         viewModelInit()
         spinnerInit()
         layoutInit()
 
         if (modify) modifyInit()
-    }
-
-    /**
-     * Toolbar Init
-     */
-    private fun toolBarInit() {
-        setSupportActionBar(app_toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "WRITING"
-        back_btn.visibility = View.VISIBLE
-        back_btn.apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                finish()
-            }
-        }
     }
 
     private fun viewModelInit() {

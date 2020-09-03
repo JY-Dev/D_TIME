@@ -17,7 +17,6 @@
             android:id="@+id/add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:background="@drawable/plus_btn_back"
             android:padding="10dp"
