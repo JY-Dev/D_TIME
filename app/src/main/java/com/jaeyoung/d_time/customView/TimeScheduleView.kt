@@ -180,11 +180,9 @@ class TimeScheduleView : ViewGroup {
 
             if (targetId == it.id && (it.startAngle == startAngle && endAngle == it.endAngle)) checkFlag =
                 true
-
             // 2020-08-31 추가
-            if (startAngle > endAngle) checkFlag = false
-
         }
+        if (startAngle > endAngle) checkFlag = false
         return checkFlag && startAngle != endAngle
 
 
