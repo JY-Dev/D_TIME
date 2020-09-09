@@ -52,7 +52,6 @@ class DiaryWriteActivity : BaseActivity() {
         popupWindowInit()
         toolBarInit("WRITING")
         viewModelInit()
-        spinnerInit()
         layoutInit()
 
         if (modify) modifyInit()
@@ -79,37 +78,39 @@ class DiaryWriteActivity : BaseActivity() {
         diary_date_tv.text = intent.getStringExtra("date")
         modify = intent.getBooleanExtra("modify", false)
         cameraUtil = CameraUtil(this)
+
+        save_btn.setOnClickListener {
+            val primary = if (primaryKey == 0L) System.currentTimeMillis() else primaryKey
+            val diaryData = DiaryData(
+                primary,
+                diary_date_tv.text.toString(),
+                title_et.text.toString(),
+                subtitle_et.text.toString(),
+                gson.toJson(imgArray, listType.type),
+                weather,
+                emotion
+            )
+            if (title_et.text.isNotEmpty()) {
+                when (modify) {
+                    true -> diaryWriteViewModel.updateData(diaryData)
+                    false -> diaryWriteViewModel.insertData(diaryData)
+                }
+            } else {
+                Toast.makeText(this, "Please Input Title", Toast.LENGTH_SHORT).show()
+            }
+        }
+        bookmark_btn.setOnClickListener {
+            if(modify){
+                val intent = Intent(this, DiaryBookMarkSelActivity::class.java)
+                intent.putExtra("id", primaryKey)
+                startActivity(intent)
+            } else Toast.makeText(this,"Please save the article before using it.",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun modifyInit() {
         primaryKey = intent.getLongExtra("primary", 0)
         diaryWriteViewModel.modifyGetData(primaryKey)
-    }
-
-    /**
-     * Spinner Init (Weather, Emotion)
-     */
-    private fun spinnerInit() {
-        val touch = object : View.OnTouchListener {
-            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-                hideKeyboard()
-                return false
-            }
-        }
-        /*weather_spinner.let {
-            it.adapter = DiarySpinnerAdapter(
-                this,
-                resources.obtainTypedArray(R.array.weather_image)
-            )
-            it.setOnTouchListener(touch)
-        }
-        emotion_spinner.let {
-            it.adapter = DiarySpinnerAdapter(
-                this,
-                resources.obtainTypedArray(R.array.emotion_image)
-            )
-            it.setOnTouchListener(touch)
-        }*/
     }
 
     /**
@@ -142,33 +143,7 @@ class DiaryWriteActivity : BaseActivity() {
                 )
             )
         }
-        save_btn.setOnClickListener {
-            val primary = if (primaryKey == 0L) System.currentTimeMillis() else primaryKey
-            val diaryData = DiaryData(
-                primary,
-                diary_date_tv.text.toString(),
-                title_et.text.toString(),
-                subtitle_et.text.toString(),
-                gson.toJson(imgArray, listType.type),
-                weather,
-                emotion
-            )
-            if (title_et.text.isNotEmpty()) {
-                when (modify) {
-                    true -> diaryWriteViewModel.updateData(diaryData)
-                    false -> diaryWriteViewModel.insertData(diaryData)
-                }
-            } else {
-                Toast.makeText(this, "Please Input Title", Toast.LENGTH_SHORT).show()
-            }
-        }
-        bookmark_btn.setOnClickListener {
-            if(modify){
-                val intent = Intent(this, DiaryBookMarkSelActivity::class.java)
-                intent.putExtra("id", primaryKey)
-                startActivity(intent)
-            } else Toast.makeText(this,"Please save the article before using it.",Toast.LENGTH_SHORT).show()
-        }
+
         edit_btn.setOnClickListener(popupViewOnClick)
         weather_btn.setOnClickListener(popupViewOnClick)
         emotion_btn.setOnClickListener(popupViewOnClick)
