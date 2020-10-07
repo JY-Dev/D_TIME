@@ -74,6 +74,7 @@ class DiaryBookMarkActivity : BaseActivity() {
         }
         bookmark_list.setOnItemClickListener { _, _, position, _ ->
             val intent = Intent(this,DiaryBookMarkDetailActivity::class.java)
+            println("test2="+bookMarkTitleList[position])
             intent.putExtra("bookmark",bookMarkTitleList[position])
             startActivity(intent)
         }

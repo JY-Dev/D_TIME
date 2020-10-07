@@ -35,7 +35,8 @@ class DiaryBookMarkDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_book_mark_detail)
-        toolBarInit(intent.extras!!.getString("bookmark",""))
+        bookMark = intent.extras!!.getString("bookmark","")
+        toolBarInit(bookMark)
         viewModelInit()
         layoutInit()
     }
@@ -60,7 +61,6 @@ class DiaryBookMarkDetailActivity : BaseActivity() {
 
         bookMarkViewModel = ViewModelProvider(this,androidViewModelFactory).get(
             BookMarkViewModel::class.java)
-
         bookMarkViewModel.getBookMarkData(bookMark)
 
         bookMarkViewModel.bookMarkList.observe(this, Observer {
@@ -84,6 +84,7 @@ class DiaryBookMarkDetailActivity : BaseActivity() {
         })
 
         bookMarkViewModel.status.observe(this, Observer {
+
             bookMarkViewModel.getBookMarkData(bookMark)
         })
 

@@ -118,6 +118,12 @@ class TimeTableActivity : AppCompatActivity() {
                 timeSchedule.curItem(id)
             }
         })
+        bell_btn.setOnClickListener {
+            Toast.makeText(this,"Preparing Function",Toast.LENGTH_SHORT).show()
+        }
+        repeat_btn.setOnClickListener {
+            Toast.makeText(this,"Preparing Function",Toast.LENGTH_SHORT).show()
+        }
         start_time_btn.setOnClickListener(timeBtnOnClickListener)
         end_time_btn.setOnClickListener(timeBtnOnClickListener)
         clock_btn.setOnClickListener(mainBtnOnClickListener)
