@@ -63,7 +63,7 @@ class TimeTableFragment(context: Context,application:Application) : Fragment() {
             TimeTableViewModel::class.java)
         timetableViewModel.timeTableList.observe(this, androidx.lifecycle.Observer {
             val data = it
-            data.sortBy { getTimeData(it.timeData).startHour+ getTimeData(it.timeData).startMin}
+            data.sortBy { getTimeData(it.timeData).startHour*60+ getTimeData(it.timeData).startMin}
             timeTableAdapter.setData(data)
         })
         timetableViewModel.getAllData(getDate(cal))
