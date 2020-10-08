@@ -43,6 +43,7 @@ class MainActivity : BaseActivity() {
         calendarViewModel =
             ViewModelProvider(this, androidViewModelFactory).get(CalendarViewModel::class.java)
         calendarDialog = CalendarDialog(this, calendarViewModel)
+
     }
 
     /**
