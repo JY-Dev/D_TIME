@@ -20,8 +20,8 @@
 ▪︎ 시간 별 일정 추가 & 확인
 ▪︎ 효율적인 시간 관리 도움
 
-## 구조
-- 기본적인 구조는 Viemodel Class 에서 Dataprocess(Model)를 통해 Room 데이터베이스에 접근해서 등록 , 수정 , 삭제와 같은 기능을 수행 후 
+## 기본적인 구조
+- iemodel Class 에서 Dataprocess(Model)를 통해 Room 데이터베이스에 접근해서 등록 , 수정 , 삭제와 같은 기능을 수행 후 
 - Callback으로 Viemodel Class에 있는 LiveData를 통해 데이터 변경을 알림 
 - View는 LiveData를 구독하고 있기때문에 바뀐데이터로 View를 그려줌
 
