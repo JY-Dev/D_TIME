@@ -1,6 +1,7 @@
 # D_TIME
 ## 스케줄 & 다이어리 관리 앱
 ## Kotlin + Room + LiveData + Koin 이용
+## 제작기간 : 2020.09.07 ~ 2020.10.13 (틈틈이 개발)
 ## PLAY STORE - https://play.google.com/store/apps/details?id=com.jaeyoung.d_time
 ## 기능
 
