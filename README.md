@@ -2,7 +2,7 @@
 ## 스케줄 관리 앱
 ## Kotlin + Room + Viewmodel + Koin 이용
 ##기능
-### [HOME]
+[HOME]
 ▪︎해야 할 일 리스트 (TODO LIST✔) 작성
 ▪︎현재 진행중인 일정 및 다음 일정 확인
 
